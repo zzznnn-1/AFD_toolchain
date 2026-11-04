@@ -1,0 +1,21 @@
+RUN P0_environment
+DONE P0_environment exit 0
+RUN placement
+DONE placement exit 0
+RUN fp8_kernel_probe
+DONE fp8_kernel_probe exit 0
+RUN P1_attention
+DONE P1_attention exit 0
+RUN P2_emulator
+DONE P2_emulator exit 0
+RUN unit_tests
+DONE unit_tests exit 0
+RUN P5_stress
+DONE P5_stress exit 0
+RUN P6_external
+DONE P6_external exit 0
+RUN P4_suite
+DONE P4_suite exit 0
+RUN complete_acceptance
+DONE complete_acceptance exit 0
+SOFTWARE PLAN PASS /home/jinyuzhe/attention-develop/reports/complete

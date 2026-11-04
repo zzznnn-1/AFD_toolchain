@@ -1,0 +1,6 @@
+decode 0 length 4097 max_abs 0.0002623647451400757
+decode 31 length 4128 max_abs 0.00035155564546585083
+decode 63 length 4160 max_abs 0.0002999529242515564
+decode 95 length 4192 max_abs 0.00028479844331741333
+decode 127 length 4224 max_abs 0.00030816346406936646
+P2 PASS {'counts': {'queue': 263, 'command': 263, 'cuda:0_d2h': 416, 'cuda:1_h2d': 416, 'kv_init': 16, 'kv_append': 128, 'attention': 128, 'cuda:1_d2h': 128, 'cuda:0_h2d': 128}, 'bytes': {'queue': 0, 'command': 0, 'cuda:0_d2h': 18874368, 'cuda:1_h2d': 18874368, 'kv_init': 0, 'kv_append': 0, 'attention': 0, 'cuda:1_d2h': 1572864, 'cuda:0_h2d': 1572864}, 'milliseconds': {'queue': 1.7496738582849503, 'command': 185.259988065809, 'cuda:0_d2h': 13.629888016730547, 'cuda:1_h2d': 5.756192020140588, 'kv_init': 8.651615545153618, 'kv_append': 5.256831929087639, 'attention': 20.15859242528677, 'cuda:1_d2h': 2.0125760016962886, 'cuda:0_h2d': 1.7656319979578257}}

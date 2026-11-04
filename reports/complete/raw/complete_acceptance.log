@@ -1,0 +1,39 @@
+{
+  "status": "BLOCKED",
+  "verified_at": "2026-11-04T14:55:42.190987+08:00",
+  "simulator_status": "PASS",
+  "functional_stages": {
+    "P0": "PASS",
+    "P1": "PASS",
+    "P2": "PASS",
+    "P3": "PASS",
+    "P4": "PASS",
+    "P5": "PASS"
+  },
+  "stages": {
+    "P0": "PASS",
+    "P1": "PASS",
+    "P2": "PASS",
+    "P3": "BLOCKED",
+    "P4": "PASS",
+    "P5": "PASS",
+    "P6": "BLOCKED"
+  },
+  "deployment_status": "BLOCKED",
+  "unit_tests": 37,
+  "model_runs": 16,
+  "command_counts": {
+    "alloc_cache": 10,
+    "init_cache": 10,
+    "get_cache_info": 996,
+    "append_and_attend": 944,
+    "free_cache": 10
+  },
+  "strict_remote_tokens": 912,
+  "all_remote_output_tokens": 928,
+  "faults": 7,
+  "stress_tokens": 2048,
+  "performance_rows": 29,
+  "execution_commit": "02bca26e1d8fa3b14a402d57e70b7c437e8deacc",
+  "execution_branch": "develop"
+}

@@ -1,0 +1,191 @@
+{
+  "time": "2026-11-04T14:26:12.121807+08:00",
+  "python": "3.10.12",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "2.2.0",
+    "safetensors": "0.8.0",
+    "kernels": "0.17.0",
+    "triton": "3.8.0",
+    "pytest": "9.2.0",
+    "flash-linear-attention": "0.5.2"
+  },
+  "torch_cuda": "13.0",
+  "disk": {
+    "total": 1887901937664,
+    "used": 1041386151936,
+    "free": 750540148736
+  },
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 4090",
+      "total_bytes": 25250627584,
+      "capability": [
+        8,
+        9
+      ],
+      "free_bytes": 24821956608
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 4090",
+      "total_bytes": 25250627584,
+      "capability": [
+        8,
+        9
+      ],
+      "free_bytes": 13009420288
+    }
+  ],
+  "source": {
+    "Qwen3_5Attention": {
+      "path": "/home/jinyuzhe/attention-develop/.venv/lib/python3.10/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py",
+      "sha256": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18"
+    },
+    "Qwen3_5TextModel": {
+      "path": "/home/jinyuzhe/attention-develop/.venv/lib/python3.10/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py",
+      "sha256": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18"
+    },
+    "Cache": {
+      "path": "/home/jinyuzhe/attention-develop/.venv/lib/python3.10/site-packages/transformers/cache_utils.py",
+      "sha256": "abdcb0ae88aa5b924ef7d76879db680e9af8f3ec1dafbba7ce446ecb521a944b"
+    },
+    "DynamicCache": {
+      "path": "/home/jinyuzhe/attention-develop/.venv/lib/python3.10/site-packages/transformers/cache_utils.py",
+      "sha256": "abdcb0ae88aa5b924ef7d76879db680e9af8f3ec1dafbba7ce446ecb521a944b"
+    },
+    "DynamicLayer": {
+      "path": "/home/jinyuzhe/attention-develop/.venv/lib/python3.10/site-packages/transformers/cache_utils.py",
+      "sha256": "abdcb0ae88aa5b924ef7d76879db680e9af8f3ec1dafbba7ce446ecb521a944b"
+    }
+  },
+  "peer_access": {
+    "0->1": false,
+    "1->0": false
+  },
+  "smi": {
+    "returncode": 0,
+    "stdout": "Wed Nov  4 14:26:12 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 4090        Off |   00000000:21:00.0 Off |                  Off |\n| 48%   30C    P8             28W /  450W |     409MiB /  24564MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   1  NVIDIA GeForce RTX 4090        Off |   00000000:81:00.0 Off |                  Off |\n| 47%   29C    P8             18W /  450W |   11675MiB /  24564MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A            1559      G   /usr/lib/xorg/Xorg                        4MiB |\n|    0   N/A  N/A         1498165      C   ...tion-develop/.venv/bin/python        386MiB |\n|    1   N/A  N/A            1559      G   /usr/lib/xorg/Xorg                        4MiB |\n|    1   N/A  N/A         1189119      C   VLLM::EngineCore                      11260MiB |\n|    1   N/A  N/A         1498165      C   ...tion-develop/.venv/bin/python        386MiB |\n+-----------------------------------------------------------------------------------------+\n",
+    "stderr": ""
+  },
+  "topology": {
+    "returncode": 0,
+    "stdout": "\t\u001b[4mGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\u001b[0m\nGPU0\t X \tSYS\t0-7,16-23\t0\t\tN/A\nGPU1\tSYS\t X \t8-15,24-31\t1\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n",
+    "stderr": ""
+  },
+  "p2p": {
+    "returncode": 0,
+    "stdout": " \t\u001b[4mGPU0\tGPU1\t\u001b[0m\n GPU0\tX\tNS\t\n GPU1\tNS\tX\t\n\nLegend:\n\n  X    = Self\n  OK   = Status Ok\n  CNS  = Chipset not supported\n  GNS  = GPU not supported\n  TNS  = Topology not supported\n  NS   = Not supported\n  U    = Unknown\n",
+    "stderr": ""
+  },
+  "cpu": {
+    "returncode": 0,
+    "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 72F3 8-Core Processor\nCPU family:                              25\nModel:                                   1\nThread(s) per core:                      2\nCore(s) per socket:                      8\nSocket(s):                               2\nStepping:                                1\nFrequency boost:                         enabled\nCPU max MHz:                             4138.3252\nCPU min MHz:                             1500.0000\nBogoMIPS:                                7385.85\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin brs arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca debug_swap ibpb_exit_to_user\nVirtualization:                          AMD-V\nL1d cache:                               512 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                8 MiB (16 instances)\nL3 cache:                                512 MiB (16 instances)\nNUMA node(s):                            2\nNUMA node0 CPU(s):                       0-7,16-23\nNUMA node1 CPU(s):                       8-15,24-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; Safe RET\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP always-on; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Vulnerable: Clear CPU buffers attempted, no microcode\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n",
+    "stderr": ""
+  },
+  "ram": {
+    "returncode": 0,
+    "stdout": "               total        used        free      shared  buff/cache   available\nMem:     270044397568 14252609536 91511468032    87232512 164280320000 253811838976\nSwap:     2147479552           0  2147479552\n",
+    "stderr": ""
+  },
+  "nvcc": {
+    "returncode": 0,
+    "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2021 NVIDIA Corporation\nBuilt on Thu_Nov_18_09:45:30_PST_2021\nCuda compilation tools, release 11.5, V11.5.119\nBuild cuda_11.5.r11.5/compiler.30672275_0\n",
+    "stderr": ""
+  },
+  "provenance": {
+    "schema_version": 2,
+    "run_id": "ba7d1f96ad884675a226e61966413566",
+    "started_at": "2026-11-04T14:26:09.191402+08:00",
+    "python": "3.10.12",
+    "executable": "/home/jinyuzhe/attention-develop/.venv/bin/python",
+    "argv": [
+      "scripts/check_environment.py",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/environment.json"
+    ],
+    "pid": 1498165,
+    "git_commit": "02bca26e1d8fa3b14a402d57e70b7c437e8deacc",
+    "git_branch": "develop",
+    "versions": {
+      "torch": "2.14.1",
+      "transformers": "5.19.0",
+      "accelerate": "1.15.0",
+      "huggingface_hub": "2.2.0",
+      "safetensors": "0.8.0",
+      "kernels": "0.17.0",
+      "triton": "3.8.0"
+    },
+    "source_sha256": {
+      "configs/complete.json": "97efedf2041b7dfe75c5087090f73005fa49939a71ad1e7fa03b8a285a1cdf65",
+      "configs/pnm.json": "94875af41c123226a87dca8d89dab18d01b73a94f73f496d642348b8e4e320b5",
+      "pyproject.toml": "cb4b55559ddcb48cdccbd1e2d90f17c645698766dd33f21dd82efa3995af5268",
+      "requirements-pnm.txt": "b85eeda91696a651eb2ce7066fe558ab394fb94b9c2a6b6dea6489446257d5f7",
+      "scripts/_bootstrap.py": "462589efba026d5e9c70668306c4341156c4eb3747bd34983dfab9a81e478a79",
+      "scripts/benchmark.py": "5435dd318ba190d8bff7d767f28005c76cd29ce73b16808ced73e694d198680e",
+      "scripts/check_environment.py": "56bd2962d264ef01694a5adbf7c75c264d170b40b0a1843cc1730a3643d458c2",
+      "scripts/check_external.py": "df5ce48ff790e5354e06f0912e4c6183baf4eef59fa0959f331af8282d147557",
+      "scripts/check_placement.py": "7347766c1db89ccf273cc47b49e97101a08e63ace21a2deb6864cb6cb558022e",
+      "scripts/complete_plan.py": "652ed4e5a6ae59f2ef7fda1bf07774488f34d091551296faeace048ef79d5a09",
+      "scripts/download_model.py": "bd0ec85f5ead536940e07e43ce49d37da7bfcb5416dff76445fde7647a255129",
+      "scripts/monitor_gpus.py": "c4cdb519cea0e4302c910f097faaef84b4043d89c9c37ad19fbedbcf98d9c451",
+      "scripts/probe_fp8.py": "3d02da338f1ce141e6bd368827cebd3d8a2a8ea123f93d107f0eff8c1b155e3c",
+      "scripts/run_qwen.py": "e90b52e0b9f085908d42a097a81441220832bbc72a55df66b18be65ef23f57b5",
+      "scripts/run_strict_suite.py": "c3d016c8141efd36569ab2c3108b2ba0ee748e7002efb0cdf99882c31f37e958",
+      "scripts/stress_emulator.py": "7431b86b4671cd5d36e7aa739b8bc203ba071d7ec1f0a24224bde70320f99002",
+      "scripts/test_attention.py": "6b66232c92e3a7d41c032d0851838cddb6c7bd206dcdeffad0e63d8174c8d920",
+      "scripts/test_emulator.py": "0fbe7db3b2f5dcf97ad28c257db0388df9cea46cb00b4485d1b6a1cdda3871fd",
+      "scripts/validate_all.py": "38baed6bbc7a0870fa24d80dd6bb2327ccccbf6b7c77a2580e85fe1877347d8a",
+      "scripts/verify_complete.py": "b77820acf1d8905d50403671b9e26128a17c6751168da8d5bd45df44a891614c",
+      "scripts/verify_results.py": "8324d5c671e05187c86484d72b70a9d4b2a5efb12aa6122b514cbe3c71d09ce3",
+      "scripts/write_complete_report.py": "312f01895d3541488aae14842170c7dcc077360280632e83337b08f35a3fc0b7",
+      "scripts/write_reports.py": "9467d897b8ee833370582fa040ea1d61601927265d6505dabd266d0bdf08ca5f",
+      "src/pnm/__init__.py": "45635bc2c6e2b090dbae95cc80b220628f12d2d57ad8e652c473ca6966f2b422",
+      "src/pnm/acceptance.py": "98ee1bd9f8baac1f0a06fe649449d76f479d5c3c4036902c7d202669b0ab99da",
+      "src/pnm/backends/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/pnm/backends/base.py": "1fe353004f7f1e3a94fb345c82434e47f48c6573644ed0a51fe00e1a39331f95",
+      "src/pnm/backends/cuda_staging.py": "5b1ecb9cd7a36ff82c8c339d807455ff58fe735cc15e5816bcb73fed448a1050",
+      "src/pnm/backends/faults.py": "0ca5f14f2718a4435962436829032da211fcdf66fc460f1a787b28725955c27f",
+      "src/pnm/backends/gpu_emulator.py": "48a82959adb4cfce09ea4696df85c6b5afd876d69e9311ae33b0f3032945f31e",
+      "src/pnm/backends/gpu_kernel.py": "3c794f4cc808feca0d6dccd9129f23e1279320fd70b690f5c9521cbfa62e645a",
+      "src/pnm/backends/gpu_memory.py": "3be89b7dc5086691a279a418c9d6c5d493f4ce280dd6de849417f11a6fa29a1f",
+      "src/pnm/backends/registry.py": "a178f271e39f4313f6ac0b958c0d6e95219df8cd0b6876c0d6e137279020e404",
+      "src/pnm/evidence.py": "45ab9ba78e70ad80f7951a6d5878ffe5ebbc4e7805979fb5d7e4f48e3a2f95cb",
+      "src/pnm/measurement.py": "b32130796b842905bf268830eab4b13a182c3eb34e4fa8026dd5db2b5266eebf",
+      "src/pnm/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/pnm/models/qwen38/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/pnm/models/qwen38/adapter.py": "e8dd0ce3967fbdd9bb72a3331208836448e88c01ac44125b5a7903e573c2ff5f",
+      "src/pnm/models/qwen38/cache_bridge.py": "d661ac4e14dc6eb9f2eca148b93afeaf4c60947318cd60a769a09b4d56f394f4",
+      "src/pnm/models/qwen38/compare.py": "2d815da12a1b387f368878326242f18e0cad1cac896c5897e7b82d6ddc6e74be",
+      "src/pnm/models/qwen38/injection.py": "16ccf587173344d6ae4fef5d463c42f84fb358a5e1a62dda288706120fc36835",
+      "src/pnm/models/qwen38/loader.py": "649c5d143dcecbff32779aa47b81ef08689b643d378122b94367a69137e21cc6",
+      "src/pnm/models/qwen38/preflight.py": "00ed1cb86fd0bf1d457c3016ec0600e4cc5657dde5293b210a6cc1e9f78a947e",
+      "src/pnm/models/qwen38/runner.py": "6af9026a1f99f8e56bed800004791445389dbc5cb9eee451457c0e31740c4870",
+      "src/pnm/performance.py": "9ea8154ddfb97df28175ae106853d8799362612c5534dcc151421e08ac7d4a76",
+      "src/pnm/protocol/__init__.py": "604412c9e759e90405b626cd707a775b2fd54182b17e8cd63668e89beb9dfaf1",
+      "src/pnm/protocol/codec.py": "606e8cd049a5b613ed929560bc91bb7e0f467b39476e5f1723a040764070cb77",
+      "src/pnm/protocol/types.py": "afd622c29b4ef6aa42e6b44b2f5e257516c1d3a26ac6f5fe91f57cb3c4da69e8",
+      "src/pnm/runtime/__init__.py": "80cd6debe4b4689fcf905a7e3664c60aa9842995aea272230a927b14225c2d01",
+      "src/pnm/runtime/api.py": "808088669876fe396bbcdce9f7573233894c3eff0f43652fe084631bf48000c6",
+      "src/pnm/runtime/metrics.py": "1de5a168512b1bbc96d04086337fcf1ff1dd7bb5e06c5f4236cecebf8cd238ec",
+      "src/pnm/validation.py": "48c52abee033e1cc5caef5e19d91c34a81eb51b35e0e4c05ee74c88fc993db96",
+      "tests/conftest.py": "2b166c52eb0d59076a370e8405a296a680473ddaa49f16c4adc24ad428f776cb",
+      "tests/test_attention.py": "f50512a1fb799318563d1acff526d17c05fee126355d32c2411d4fc485ff181a",
+      "tests/test_backend_factory.py": "bc13b4b894b43d7d848d2770d4b5e8da4f3d813228b0d6fa30a19c0c4fafbd72",
+      "tests/test_evidence.py": "7ed34647c82ed98df724a17ff30c15b7cee012f62c8c4feaeffb5b115ed9408f",
+      "tests/test_failures.py": "c13f4f6eb0f373203db0d1e5e7f60250f77eb95f57a795fc2f870cbca7bc9867",
+      "tests/test_loading.py": "0b1bc616dcca86da81154c844e95766366a9c8198e8da0cb22991c1970f09052",
+      "tests/test_performance.py": "87f9f9d6235e9cf07f510aba6c52b483e82a5c38bdc66497b2abf10c6dba551e",
+      "tests/test_preflight.py": "ebdbe187b49ea7509713e906aaea1023bf7d2c26f792c35cc80c2cec59ad020e",
+      "tests/test_protocol.py": "035c0c786533e225ef6d62d1a0f00416e3941c4cf8573f266676ed7306d58fc8",
+      "tests/test_qwen_adapter.py": "e085bc4afa9474f667191d3f9287614c1674902451a856103aef26fba3c9db20",
+      "tests/test_runtime.py": "960a303deddd88858e5a9f388efdfeb0bb196391d762eff75cde06eef7d3b664",
+      "tests/test_strict_cache.py": "7a0c513bfe24da20ff14e24d89f2cfb56be7cb8a75972039db46d3495dce9d67"
+    },
+    "finished_at": "2026-11-04T14:26:12.652081+08:00",
+    "source_unchanged": true
+  }
+}

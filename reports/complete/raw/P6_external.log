@@ -1,0 +1,29 @@
+{
+  "status": "BLOCKED",
+  "time": "2026-11-04T14:26:49.115291+08:00",
+  "lspci_exit_code": 0,
+  "candidate_device_nodes": {
+    "pnm": [],
+    "kxp": [],
+    "xdma": []
+  },
+  "python_packages": {
+    "vllm": false,
+    "pnm_driver": false,
+    "kxp_driver": false
+  },
+  "software_contract": "PASS: versioned command envelope and configurable Backend factory",
+  "blocking_reasons": [
+    "No project ASIC device/driver adapter and no finalized DMA/ioctl ABI were supplied.",
+    "PCIe/CXL type, registered-memory ownership, queue/reset/completion rules need hardware confirmation.",
+    "vLLM integration is explicitly deferred in this prototype specification; no vLLM backend was run."
+  ],
+  "required_inputs": [
+    "PCI vendor/device IDs and device node",
+    "driver headers/library and version",
+    "DMA buffer registration/IOMMU API",
+    "command queue and completion ABI",
+    "device reset/generation semantics",
+    "KXP supported layout/dtype/mask/capacity"
+  ]
+}

@@ -8,6 +8,8 @@ Python/PyTorch/Transformers 原型：GPU0 运行模型计算，GPU1 维护 Layer
 
 最新全方案结果见 [reports/complete/ACCEPTANCE.md](reports/complete/ACCEPTANCE.md)。当前 develop 独立工作区为 `/home/jinyuzhe/attention-develop`，主目录 `/home/jinyuzhe/attention` 保留用户的 main 工作区。新增 `strict_remote` 在 Prefill 后释放 Layer 3 本地 KV，仅 GPU1 保留完整历史；物理 GPU 独占、全部模型权重常驻和 Strict Remote KV 是不同验收条件。
 
+本次实测：37 项自动化测试通过；六个上下文各 128 步 Strict 对比的四级误差均为 0；Strict 共 912 步真正使用 GPU1 O；2048 步设备压力和 7 个完整模型故障场景通过。GPU0 目标层历史 KV 始终为 0。软件功能 P0–P5 PASS；独占部署及 P6 真实硬件接入仍 BLOCKED，完整缺项在报告中。
+
 ```bash
 cd /home/jinyuzhe/attention-develop
 .venv/bin/python scripts/complete_plan.py --output-dir reports/new-complete-run

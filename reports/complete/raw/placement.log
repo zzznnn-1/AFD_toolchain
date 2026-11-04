@@ -1,0 +1,19 @@
+Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+Resolving official FP8 snapshot Qwen/Qwen3.8-27B-FP8 017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+{
+  "status": "PASS",
+  "selected_resident_layers": 45,
+  "resident_parameter_bytes": 17146772736,
+  "cpu_parameter_bytes": 13242690784,
+  "required_gpu0_bytes": 24521407744,
+  "fully_resident_fits": false,
+  "foreign_gpu1_processes": [
+    {
+      "gpu_uuid": "GPU-ebe16217-2373-4202-8599-dd10af2b39bd",
+      "pid": 1189119,
+      "name": "VLLM::EngineCore",
+      "used_mib": 11260
+    }
+  ],
+  "blocking_reasons": []
+}

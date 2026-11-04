@@ -1,0 +1,132 @@
+[
+  {
+    "name": "P0_environment",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/check_environment.py",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/environment.json"
+    ],
+    "started_at": "2026-11-04T14:26:07.803234+08:00",
+    "seconds": 5.7064485447481275,
+    "exit_code": 0
+  },
+  {
+    "name": "placement",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/check_placement.py",
+      "--config",
+      "configs/complete.json",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/placement.json"
+    ],
+    "started_at": "2026-11-04T14:26:13.510370+08:00",
+    "seconds": 5.404024564661086,
+    "exit_code": 0
+  },
+  {
+    "name": "fp8_kernel_probe",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/probe_fp8.py",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/fp8_probe.json"
+    ],
+    "started_at": "2026-11-04T14:26:18.915176+08:00",
+    "seconds": 7.507513170130551,
+    "exit_code": 0
+  },
+  {
+    "name": "P1_attention",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/test_attention.py",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/P1_attention.json"
+    ],
+    "started_at": "2026-11-04T14:26:26.423861+08:00",
+    "seconds": 2.939307628199458,
+    "exit_code": 0
+  },
+  {
+    "name": "P2_emulator",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/test_emulator.py",
+      "--prefill",
+      "4096",
+      "--steps",
+      "128",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/P2_emulator.json"
+    ],
+    "started_at": "2026-11-04T14:26:29.364220+08:00",
+    "seconds": 2.5001969188451767,
+    "exit_code": 0
+  },
+  {
+    "name": "unit_tests",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml=/home/jinyuzhe/attention-develop/reports/complete/raw/unit_tests.xml",
+      "--evidence-json=/home/jinyuzhe/attention-develop/reports/complete/raw/unit_tests.json"
+    ],
+    "started_at": "2026-11-04T14:26:31.865501+08:00",
+    "seconds": 7.588856283109635,
+    "exit_code": 0
+  },
+  {
+    "name": "P5_stress",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "-u",
+      "scripts/stress_emulator.py",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/P5_stress.json"
+    ],
+    "started_at": "2026-11-04T14:26:39.455561+08:00",
+    "seconds": 8.614895131904632,
+    "exit_code": 0
+  },
+  {
+    "name": "P6_external",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/check_external.py",
+      "--output",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw/P6_external.json"
+    ],
+    "started_at": "2026-11-04T14:26:48.071700+08:00",
+    "seconds": 1.299967837985605,
+    "exit_code": 0
+  },
+  {
+    "name": "P4_suite",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "-u",
+      "scripts/run_strict_suite.py",
+      "--output-dir",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw"
+    ],
+    "started_at": "2026-11-04T14:26:49.372503+08:00",
+    "seconds": 1731.789249715861,
+    "exit_code": 0
+  },
+  {
+    "name": "complete_acceptance",
+    "argv": [
+      "/home/jinyuzhe/attention-develop/.venv/bin/python",
+      "scripts/verify_complete.py",
+      "--artifact-dir",
+      "/home/jinyuzhe/attention-develop/reports/complete/raw"
+    ],
+    "started_at": "2026-11-04T14:55:41.163048+08:00",
+    "seconds": 1.3941894760355353,
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,2 @@
+FP8_LINEAR_PASS [1, 1, 256] torch.bfloat16 cuda:0
+[('weight', 'torch.float8_e4m3fn', [256, 256]), ('weight_scale_inv', 'torch.float32', [2, 2])]

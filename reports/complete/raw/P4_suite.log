@@ -1,0 +1,92 @@
+Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+Resolving official FP8 snapshot Qwen/Qwen3.8-27B-FP8 017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Anchoring 65 ambiguous FP8 exclusion names; checkpoint weights/scales unchanged
+Loading FP8 model; resident decoder layers 45 snapshot /home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Some parameters are on the meta device because they were offloaded to the cpu.
+FP8 model loaded in 67.30663731880486 seconds
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+L4-local local step=1/128 cache=5 remote_used=0
+L4-local local step=32/128 cache=36 remote_used=0
+L4-local local step=64/128 cache=68 remote_used=0
+L4-local local step=96/128 cache=100 remote_used=0
+L4-local local step=128/128 cache=132 remote_used=0
+L4-strict strict_remote step=1/128 cache=5 remote_used=1
+L4-strict strict_remote step=32/128 cache=36 remote_used=32
+L4-strict strict_remote step=64/128 cache=68 remote_used=64
+L4-strict strict_remote step=96/128 cache=100 remote_used=96
+L4-strict strict_remote step=128/128 cache=132 remote_used=128
+L4-strict-greedy strict_remote step=1/16 cache=5 remote_used=1
+L16-local local step=1/128 cache=17 remote_used=0
+L16-local local step=32/128 cache=48 remote_used=0
+L16-local local step=64/128 cache=80 remote_used=0
+L16-local local step=96/128 cache=112 remote_used=0
+L16-local local step=128/128 cache=144 remote_used=0
+L16-strict strict_remote step=1/128 cache=17 remote_used=1
+L16-strict strict_remote step=32/128 cache=48 remote_used=32
+L16-strict strict_remote step=64/128 cache=80 remote_used=64
+L16-strict strict_remote step=96/128 cache=112 remote_used=96
+L16-strict strict_remote step=128/128 cache=144 remote_used=128
+L128-local local step=1/128 cache=129 remote_used=0
+L128-local local step=32/128 cache=160 remote_used=0
+L128-local local step=64/128 cache=192 remote_used=0
+L128-local local step=96/128 cache=224 remote_used=0
+L128-local local step=128/128 cache=256 remote_used=0
+L128-strict strict_remote step=1/128 cache=129 remote_used=1
+L128-strict strict_remote step=32/128 cache=160 remote_used=32
+L128-strict strict_remote step=64/128 cache=192 remote_used=64
+L128-strict strict_remote step=96/128 cache=224 remote_used=96
+L128-strict strict_remote step=128/128 cache=256 remote_used=128
+L128-strict-greedy strict_remote step=1/128 cache=129 remote_used=1
+L128-strict-greedy strict_remote step=32/128 cache=160 remote_used=32
+L128-strict-greedy strict_remote step=64/128 cache=192 remote_used=64
+L128-strict-greedy strict_remote step=96/128 cache=224 remote_used=96
+L128-strict-greedy strict_remote step=128/128 cache=256 remote_used=128
+L128-shadow_compare shadow_compare step=1/16 cache=129 remote_used=0
+L128-shadow_remote shadow_remote step=1/16 cache=129 remote_used=1
+output-intervention strict_remote step=1/2 cache=129 remote_used=1
+L1024-local local step=1/128 cache=1025 remote_used=0
+L1024-local local step=32/128 cache=1056 remote_used=0
+L1024-local local step=64/128 cache=1088 remote_used=0
+L1024-local local step=96/128 cache=1120 remote_used=0
+L1024-local local step=128/128 cache=1152 remote_used=0
+L1024-strict strict_remote step=1/128 cache=1025 remote_used=1
+L1024-strict strict_remote step=32/128 cache=1056 remote_used=32
+L1024-strict strict_remote step=64/128 cache=1088 remote_used=64
+L1024-strict strict_remote step=96/128 cache=1120 remote_used=96
+L1024-strict strict_remote step=128/128 cache=1152 remote_used=128
+L4096-local local step=1/128 cache=4097 remote_used=0
+L4096-local local step=32/128 cache=4128 remote_used=0
+L4096-local local step=64/128 cache=4160 remote_used=0
+L4096-local local step=96/128 cache=4192 remote_used=0
+L4096-local local step=128/128 cache=4224 remote_used=0
+L4096-strict strict_remote step=1/128 cache=4097 remote_used=1
+L4096-strict strict_remote step=32/128 cache=4128 remote_used=32
+L4096-strict strict_remote step=64/128 cache=4160 remote_used=64
+L4096-strict strict_remote step=96/128 cache=4192 remote_used=96
+L4096-strict strict_remote step=128/128 cache=4224 remote_used=128
+L8192-local local step=1/128 cache=8193 remote_used=0
+L8192-local local step=32/128 cache=8224 remote_used=0
+L8192-local local step=64/128 cache=8256 remote_used=0
+L8192-local local step=96/128 cache=8288 remote_used=0
+L8192-local local step=128/128 cache=8320 remote_used=0
+L8192-strict strict_remote step=1/128 cache=8193 remote_used=1
+L8192-strict strict_remote step=32/128 cache=8224 remote_used=32
+L8192-strict strict_remote step=64/128 cache=8256 remote_used=64
+L8192-strict strict_remote step=96/128 cache=8288 remote_used=96
+L8192-strict strict_remote step=128/128 cache=8320 remote_used=128
+fault-device_reset strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS device_reset STALE_HANDLE
+fault-device_lost strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS device_lost DEVICE_LOST
+fault-cancel strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS cancel CANCELLED
+fault-timeout_before strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS timeout_before TIMEOUT_UNKNOWN
+fault-timeout_after strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS timeout_after TIMEOUT_UNKNOWN
+fault-duplicate_completion strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS duplicate_completion INVALID_COMPLETION
+fault-transfer_error strict_remote step=1/3 cache=17 remote_used=1
+FAULT PASS transfer_error TRANSFER_ERROR
+P4/P5 RESULT PASS /home/jinyuzhe/attention-develop/reports/complete/raw/P4_suite.json

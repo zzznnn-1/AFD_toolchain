@@ -1,0 +1,119 @@
+    def get_seq_length(self, layer_idx: int = 0) -> int:
+        """Returns the sequence length of the cache for the given layer."""
+        if layer_idx >= len(self.layers):
+            return 0
+
+        # For alternating attention/linear attention  caches, `get_seq_length` needs to use attention layer idx when called with default layer_idx
+        if not isinstance(self.layers[layer_idx], CacheLayerMixin):
+            # If this is called with non-default arg, raise
+            if layer_idx != 0:
+                raise ValueError(
+                    f"You called `get_seq_length` on layer index {layer_idx}, but this layer is a LinearAttention layer, which "
+                    "does not track sequence length."
+                )
+            try:
+                # Use the first attention layer
+                layer_idx = next(idx for idx in range(len(self)) if isinstance(self.layers[idx], CacheLayerMixin))
+            except StopIteration:
+                raise ValueError(
+                    "`get_seq_length` can only be called on Attention layers, and the current Cache seem to only contain "
+                    "LinearAttention layers."
+                )
+
+        return self.layers[layer_idx].get_seq_length()
+class DynamicLayer(CacheLayerMixin):
+    """
+    A cache layer that grows dynamically as more tokens are generated. This is the default for generative models.
+    It stores the key and value states as tensors of shape `[batch_size, num_heads, seq_len, head_dim]`.
+    """
+
+    is_sliding = False
+    is_croppable = True
+
+    def lazy_initialization(self, key_states: torch.Tensor, value_states: torch.Tensor) -> None:
+        self.dtype, self.device = key_states.dtype, key_states.device
+        self.keys = torch.tensor([], dtype=self.dtype, device=self.device)
+        self.values = torch.tensor([], dtype=self.dtype, device=self.device)
+        self.is_initialized = True
+
+    def update(
+        self, key_states: torch.Tensor, value_states: torch.Tensor, *args, **kwargs
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """
+        Update the key and value caches in-place, and return the necessary keys and value states.
+
+        Args:
+            key_states (`torch.Tensor`): The new key states to cache.
+            value_states (`torch.Tensor`): The new value states to cache.
+
+        Returns:
+            tuple[`torch.Tensor`, `torch.Tensor`]: The key and value states.
+        """
+        # Lazy initialization
+        if not self.is_initialized:
+            self.lazy_initialization(key_states, value_states)
+
+        self.keys = torch.cat([self.keys, key_states], dim=-2)
+        self.values = torch.cat([self.values, value_states], dim=-2)
+        return self.keys, self.values
+
+    def get_mask_sizes(self, query_length: int) -> tuple[int, int]:
+        """Return the length and offset of the cache, used to generate the mask"""
+        kv_offset = 0
+        kv_length = self.get_seq_length() + query_length
+        return kv_length, kv_offset
+
+    def get_seq_length(self) -> int:
+        """Returns the sequence length of the cached states."""
+        if not self.is_initialized or self.keys.numel() == 0:
+            return 0
+        return self.keys.shape[-2]
+
+    def get_max_length(self) -> int:
+        """Returns the maximum sequence length of the cache object. DynamicLayer does not have a maximum length."""
+        return -1
+
+    def reset(self) -> None:
+        """Resets the cache values while preserving the objects."""
+        # Dropped rather than zeroed, as `update` grows them by concatenation. Clearing `is_initialized` first skips
+        # the zeroing in `super`, which is still called to reset the `cumulative_length` of the inheriting layers.
+        self.keys = self.values = None
+        self.is_initialized = False
+        super().reset()
+
+    def crop(self, tokens_to_remove: int) -> None:
+        """
+        Remove `tokens_to_remove` tokens from the current cache layer.
+        """
+        # Legacy path: `tokens_to_remove` represents the final absolute size that the cache should have
+        if tokens_to_remove > 0:
+            logger.warning_once(
+                "Calling `crop` with a positive value is deprecated and will be removed in version 5.18. Please use a negative "
+                "integer to remove that number of tokens from the cache instead."
+            )
+            current_length = self.get_seq_length()
+            # If the absolute value requested is larger than current length, just do nothing
+            if tokens_to_remove >= current_length:
+                return
+            else:
+                tokens_to_remove = self.get_seq_length() - tokens_to_remove
+
+        # Nothing to do in this case
+        if tokens_to_remove == 0:
+            return
+
+        # Crop the cache
+        self.keys = self.keys[..., : -abs(tokens_to_remove), :]
+        self.values = self.values[..., : -abs(tokens_to_remove), :]
+
+    def batch_repeat_interleave(self, repeats: int) -> None:
+        """Repeat the cache `repeats` times in the batch dimension."""
+        if self.get_seq_length() > 0:
+            self.keys = self.keys.repeat_interleave(repeats, dim=0)
+            self.values = self.values.repeat_interleave(repeats, dim=0)
+
+    def batch_select_indices(self, indices: torch.Tensor) -> None:
+        """Only keep the `indices` in the batch dimension of the cache."""
+        if self.get_seq_length() > 0:
+            self.keys = self.keys[indices, ...]
+            self.values = self.values[indices, ...]

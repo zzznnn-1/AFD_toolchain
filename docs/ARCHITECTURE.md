@@ -8,7 +8,7 @@ Runtime 对 Backend Completion 校验 command_id、request/layer、handle、dtyp
 
 协议 v1 使用 BF16、BHTD、batch=1、24 Q heads、4 KV heads、256 head dim。Decode 仅接受单 token。ALLOC/INIT/APPEND/INFO/FREE 均带 command_id、request_id、layer_id、handle；APPEND 还带 expected_length 和 token_position。完整描述见 src/pnm/protocol/types.py。
 
-所有命令串行执行。命令 ID 在 session 内去重，重复命令返回 DUPLICATE_COMMAND，不重放输出也不再次追加。重试应先查询长度，再用新 ID；已成功的 token 即使用新 ID 重投，也会被长度/位置检查拒绝。失败的 append 在全部计算和返回拷贝完成前不提交长度；未提交的槽位可被覆盖。session 默认最多 100000 个命令，达到预算后拒绝，避免无限保留去重状态。释放 Runtime 后清空记录。
+所有命令串行执行。命令 ID 在 session 内去重，重复命令返回 DUPLICATE_COMMAND，不重放输出也不再次追加。确定失败且未提交的命令可先查询长度，再用新 ID；TIMEOUT_UNKNOWN/错误 completion 会 poison Handle，查询不自动解除，模型请求应释放并重新 Prefill。已成功 Token 即使用新 ID 重投，也会被长度/位置检查拒绝。append 在计算和返回拷贝完成前不提交长度；未提交槽位可覆盖。session 最多 100000 个命令，达到预算后拒绝，关闭 Runtime 后清空记录。
 
 Pinned slots 创建时预分配并复用；K/V 槽默认只容纳 256 Tokens，完整 Prefill 在一个 INIT 命令内分块初始化。每个 chunk 的 D2H、H2D 和 KV 写入完成后才复用相应 host/device scratch。Q/O 单 token，mask 独立槽。non_blocking copy 配合专用 streams/events，但不宣称流水重叠。返回 O clone 给调用方独立所有权。
 
