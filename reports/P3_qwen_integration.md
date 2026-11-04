@@ -1,5 +1,7 @@
 # P3 功能与数值：PASS；严格独占部署：BLOCKED
 
+> 本文件是首次运行的历史基线。`develop` 最新复跑报告见 [develop/P3_qwen_integration.md](develop/P3_qwen_integration.md)。
+
 完整官方 Qwen/Qwen3.8-27B-FP8，Revision `017b9c7af6b5689d5dd426a76e0bc077eb5ca20a`。实际结果以 `raw/P3_suite.json` 和 `raw/P3_suite.log` 为准；RUNNING 或 FAIL 不能算验收通过。
 
 **完整 P3 验收状态为 BLOCKED**：下表记录实际功能和数值结果，但本机仍使用 CPU 权重 offload，且 GPU1 存在既有的无关推理服务，未达到全量 GPU0 常驻/物理独占条件。不把本次功能通过宣称为严格独占部署完成。

@@ -1,5 +1,7 @@
 # P0–P3 最终验收
 
+> 本文件是首次运行的历史基线。`develop` 最新实现和复跑结果见 [develop/ACCEPTANCE.md](develop/ACCEPTANCE.md)。
+
 **总状态：BLOCKED（严格独占部署）；功能与数值验证：PASS。**
 
 已经创建分层工程并实际运行完整官方 FP8 模型。P3 的 `shadow_remote` 确实使用 GPU1 返回的 Attention O，完成 32/128 Token Decode、固定序列四级数值对比和 4096 Token 上下文测试。未把 CPU offload / 共享设备结果宣称为全量 GPU0 常驻或物理独占验收。

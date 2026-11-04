@@ -1,0 +1,143 @@
+[
+  {
+    "name": "P0_environment",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/check_environment.py",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/environment.json"
+    ],
+    "started_at": "2026-11-04T13:27:56.690254+08:00",
+    "seconds": 5.663027440197766,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "placement",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/check_placement.py",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/placement.json"
+    ],
+    "started_at": "2026-11-04T13:28:02.353890+08:00",
+    "seconds": 5.365920453798026,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "strict_placement",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/check_placement.py",
+      "--strict-deployment",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/strict_placement.json"
+    ],
+    "started_at": "2026-11-04T13:28:07.720837+08:00",
+    "seconds": 5.375621393788606,
+    "exit_code": 2,
+    "accepted_exit_codes": [
+      0,
+      2
+    ]
+  },
+  {
+    "name": "fp8_kernel_probe",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/probe_fp8.py",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/fp8_probe.json"
+    ],
+    "started_at": "2026-11-04T13:28:13.097518+08:00",
+    "seconds": 7.682781346142292,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "P1_attention",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/test_attention.py",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/P1_attention.json"
+    ],
+    "started_at": "2026-11-04T13:28:20.781580+08:00",
+    "seconds": 2.890084327198565,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "P2_emulator",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/test_emulator.py",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/P2_emulator.json"
+    ],
+    "started_at": "2026-11-04T13:28:23.672529+08:00",
+    "seconds": 2.441066906321794,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "unit_tests",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml=/home/jinyuzhe/attention/reports/develop/raw/unit_tests.xml",
+      "--evidence-json=/home/jinyuzhe/attention/reports/develop/raw/unit_tests.json"
+    ],
+    "started_at": "2026-11-04T13:28:26.114535+08:00",
+    "seconds": 7.065430216025561,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "P3_suite",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "-u",
+      "scripts/run_qwen.py",
+      "--suite",
+      "--output",
+      "/home/jinyuzhe/attention/reports/develop/raw/P3_suite.json"
+    ],
+    "started_at": "2026-11-04T13:28:33.180748+08:00",
+    "seconds": 785.6986248409376,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  },
+  {
+    "name": "acceptance",
+    "argv": [
+      "/home/jinyuzhe/attention/.venv/bin/python",
+      "scripts/verify_results.py",
+      "--artifact-dir",
+      "/home/jinyuzhe/attention/reports/develop/raw"
+    ],
+    "started_at": "2026-11-04T13:41:38.880647+08:00",
+    "seconds": 1.299953788984567,
+    "exit_code": 0,
+    "accepted_exit_codes": [
+      0
+    ]
+  }
+]
