@@ -1,0 +1,16 @@
+{
+  "repository": "kernels-community/finegrained-fp8",
+  "revision": "03ae31933313f38fae2b050dbe2731024386c369",
+  "files": {
+    "build/torch-cuda/grouped.py": "52b05cc7073ed9e2a366cee0e05fbecf21c431edb8f9c7ca75e3414adbdec5b0",
+    "build/torch-cuda/fused_grouped.py": "55893766cd9c34a4fe9b56254f3c8cdb0de2cdb8128bb5766724c1cefa6f31d0",
+    "build/torch-cuda/bayesian_autotuner.py": "8c1518bf27e9107b13060165a6dd93b397a6cfe092332be37354f151f64a56b8",
+    "build/torch-cuda/__init__.py": "01f34c9fac58ce8646492c0b68ca1748c989bcf128fe9f0d806c4b407e426b39",
+    "build/torch-cuda/utils.py": "2cb87f98ab385e41c95fdf1e1bec777a25c8e0bb003a357a72c07a53c2b7b5d0",
+    "build/torch-cuda/_private_for_testing.py": "5ccf7e8e713659beb9d8603e5399f42cce95952b5a49c58a1f454855085fdfee",
+    "build/torch-cuda/_ops.py": "3b8057f777f5b167e90ba18100851ebde07ff685ad6d9147fb21e16e1ed62779",
+    "build/torch-cuda/fused_batched.py": "e712ca6aff1d589a9162429d546c75e2e2fd168331a9e1c21153320407672034",
+    "build/torch-cuda/matmul.py": "0f668b5d9e0e7db0675ea4518052b9320830f64f2468f2ecbcae7d0876336807",
+    "build/torch-cuda/batched.py": "6eb4806f45ace98f2c3b5160105cac6398ba3bb4bdbfab86264f5d4d9bb0a096"
+  }
+}

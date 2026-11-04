@@ -1,0 +1,20 @@
+1 prefill {'max_abs': 0.0, 'mean_abs': 0.0, 'max_relative': 0.0, 'rms': 0.0, 'relative_floor': 0.001, 'reference_abs_max': 3.34375, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+1 decode {'max_abs': 0.0, 'mean_abs': 0.0, 'max_relative': 0.0, 'rms': 0.0, 'relative_floor': 0.001, 'reference_abs_max': 3.34375, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+16 prefill {'max_abs': 0.009629011154174805, 'mean_abs': 0.0006426443578675389, 'max_relative': 1.14460289478302, 'rms': 0.0009372741333208978, 'relative_floor': 0.001, 'reference_abs_max': 3.2094645500183105, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+16 decode {'max_abs': 0.004350423812866211, 'mean_abs': 0.0005564445164054632, 'max_relative': 0.808149516582489, 'rms': 0.0007507612463086843, 'relative_floor': 0.001, 'reference_abs_max': 1.6308891773223877, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+128 prefill {'max_abs': 0.009752750396728516, 'mean_abs': 0.0003579772019293159, 'max_relative': 1.9037059545516968, 'rms': 0.0005287479725666344, 'relative_floor': 0.001, 'reference_abs_max': 3.390625, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+128 decode {'max_abs': 0.0018552541732788086, 'mean_abs': 0.00022837542928755283, 'max_relative': 0.48215577006340027, 'rms': 0.0003011476364918053, 'relative_floor': 0.001, 'reference_abs_max': 0.7916101217269897, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+1024 prefill {'max_abs': 0.008965730667114258, 'mean_abs': 0.00015430022904183716, 'max_relative': 1.7653679847717285, 'rms': 0.00024381924595218152, 'relative_floor': 0.001, 'reference_abs_max': 3.0976598262786865, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+1024 decode {'max_abs': 0.0005621761083602905, 'mean_abs': 8.176238043233752e-05, 'max_relative': 0.16755981743335724, 'rms': 0.00010796973947435617, 'relative_floor': 0.001, 'reference_abs_max': 0.2514623701572418, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+4096 prefill {'max_abs': 0.00809788703918457, 'mean_abs': 8.277750748675317e-05, 'max_relative': 1.885008454322815, 'rms': 0.00013939999917056412, 'relative_floor': 0.001, 'reference_abs_max': 3.5, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+4096 decode {'max_abs': 0.00029609352350234985, 'mean_abs': 3.964225106756203e-05, 'max_relative': 0.11361482739448547, 'rms': 5.2086856157984585e-05, 'relative_floor': 0.001, 'reference_abs_max': 0.09401638805866241, 'finite': True, 'atol': 0.02, 'rtol': 0.02, 'pass': True}
+Traceback (most recent call last):
+  File "/home/jinyuzhe/attention/scripts/test_attention.py", line 53, in <module>
+    write_json(a.output,run(a.lengths,a.device))
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jinyuzhe/attention/scripts/test_attention.py", line 37, in run
+    stats = check_close(attend(q,k,v,13,m),reference_attention(q,k,v,13,m))
+  File "/home/jinyuzhe/attention/src/pnm/backends/gpu_kernel.py", line 28, in attend
+    return scaled_dot_product_attention(q, k, v, attn_mask=effective, is_causal=False, enable_gqa=True)
+RuntimeError: invalid dtype for bias - should match query's dtype

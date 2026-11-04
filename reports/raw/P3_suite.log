@@ -1,0 +1,43 @@
+Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+Resolving official FP8 snapshot Qwen/Qwen3.8-27B-FP8 017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Anchoring 65 ambiguous FP8 exclusion names; checkpoint weights/scales unchanged
+Loading FP8 model; resident decoder layers 48 snapshot /home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Some parameters are on the meta device because they were offloaded to the cpu.
+FP8 model loaded in 83.09510884294286 seconds
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+short-local local step=1/32 cache=31 remote_used=0
+short-local local step=32/32 cache=62 remote_used=0
+short-shadow_compare shadow_compare step=1/32 cache=31 remote_used=0
+short-shadow_compare shadow_compare step=32/32 cache=62 remote_used=0
+short-shadow_remote shadow_remote step=1/32 cache=31 remote_used=1
+short-shadow_remote shadow_remote step=32/32 cache=62 remote_used=32
+short-remote-greedy shadow_remote step=1/32 cache=31 remote_used=1
+short-remote-greedy shadow_remote step=32/32 cache=62 remote_used=32
+medium-local local step=1/128 cache=513 remote_used=0
+medium-local local step=32/128 cache=544 remote_used=0
+medium-local local step=64/128 cache=576 remote_used=0
+medium-local local step=96/128 cache=608 remote_used=0
+medium-local local step=128/128 cache=640 remote_used=0
+medium-shadow_compare shadow_compare step=1/128 cache=513 remote_used=0
+medium-shadow_compare shadow_compare step=32/128 cache=544 remote_used=0
+medium-shadow_compare shadow_compare step=64/128 cache=576 remote_used=0
+medium-shadow_compare shadow_compare step=96/128 cache=608 remote_used=0
+medium-shadow_compare shadow_compare step=128/128 cache=640 remote_used=0
+medium-shadow_remote shadow_remote step=1/128 cache=513 remote_used=1
+medium-shadow_remote shadow_remote step=32/128 cache=544 remote_used=32
+medium-shadow_remote shadow_remote step=64/128 cache=576 remote_used=64
+medium-shadow_remote shadow_remote step=96/128 cache=608 remote_used=96
+medium-shadow_remote shadow_remote step=128/128 cache=640 remote_used=128
+medium-remote-greedy shadow_remote step=1/128 cache=513 remote_used=1
+medium-remote-greedy shadow_remote step=32/128 cache=544 remote_used=32
+medium-remote-greedy shadow_remote step=64/128 cache=576 remote_used=64
+medium-remote-greedy shadow_remote step=96/128 cache=608 remote_used=96
+medium-remote-greedy shadow_remote step=128/128 cache=640 remote_used=128
+context4096-local local step=1/32 cache=4097 remote_used=0
+context4096-local local step=32/32 cache=4128 remote_used=0
+context4096-shadow_compare shadow_compare step=1/32 cache=4097 remote_used=0
+context4096-shadow_compare shadow_compare step=32/32 cache=4128 remote_used=0
+context4096-shadow_remote shadow_remote step=1/32 cache=4097 remote_used=1
+context4096-shadow_remote shadow_remote step=32/32 cache=4128 remote_used=32
+RESULT PASS reports/raw/P3_suite.json

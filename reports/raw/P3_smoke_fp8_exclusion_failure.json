@@ -1,0 +1,219 @@
+{
+  "status": "FAIL",
+  "configuration": {
+    "model_id": "Qwen/Qwen3.8-27B-FP8",
+    "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+    "source_device": "cuda:0",
+    "emulator_device": "cuda:1",
+    "layer_id": 3,
+    "capacity": 8192,
+    "resident_layers": 48,
+    "seed": 20261104,
+    "dtype": "bfloat16",
+    "attention_atol": 0.02,
+    "attention_rtol": 0.02,
+    "logits_atol": 0.25,
+    "logits_rtol": 0.02,
+    "fully_resident": false
+  },
+  "runs": [],
+  "comparisons": [],
+  "model": {
+    "model_id": "Qwen/Qwen3.8-27B-FP8",
+    "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+    "snapshot_path": "/home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+    "load_seconds": 72.48781682690606,
+    "hf_device_map": {
+      "model.visual": "cpu",
+      "model.language_model.embed_tokens": "cpu",
+      "lm_head": "cpu",
+      "model.language_model.norm": 0,
+      "model.language_model.rotary_emb": 0,
+      "model.language_model.layers.0": 0,
+      "model.language_model.layers.1": 0,
+      "model.language_model.layers.2": 0,
+      "model.language_model.layers.3": 0,
+      "model.language_model.layers.4": 0,
+      "model.language_model.layers.5": 0,
+      "model.language_model.layers.6": 0,
+      "model.language_model.layers.7": 0,
+      "model.language_model.layers.8": 0,
+      "model.language_model.layers.9": 0,
+      "model.language_model.layers.10": 0,
+      "model.language_model.layers.11": 0,
+      "model.language_model.layers.12": 0,
+      "model.language_model.layers.13": 0,
+      "model.language_model.layers.14": 0,
+      "model.language_model.layers.15": 0,
+      "model.language_model.layers.16": 0,
+      "model.language_model.layers.17": 0,
+      "model.language_model.layers.18": 0,
+      "model.language_model.layers.19": 0,
+      "model.language_model.layers.20": 0,
+      "model.language_model.layers.21": 0,
+      "model.language_model.layers.22": 0,
+      "model.language_model.layers.23": 0,
+      "model.language_model.layers.24": 0,
+      "model.language_model.layers.25": 0,
+      "model.language_model.layers.26": 0,
+      "model.language_model.layers.27": 0,
+      "model.language_model.layers.28": 0,
+      "model.language_model.layers.29": 0,
+      "model.language_model.layers.30": 0,
+      "model.language_model.layers.31": 0,
+      "model.language_model.layers.32": 0,
+      "model.language_model.layers.33": 0,
+      "model.language_model.layers.34": 0,
+      "model.language_model.layers.35": 0,
+      "model.language_model.layers.36": 0,
+      "model.language_model.layers.37": 0,
+      "model.language_model.layers.38": 0,
+      "model.language_model.layers.39": 0,
+      "model.language_model.layers.40": 0,
+      "model.language_model.layers.41": 0,
+      "model.language_model.layers.42": 0,
+      "model.language_model.layers.43": 0,
+      "model.language_model.layers.44": 0,
+      "model.language_model.layers.45": 0,
+      "model.language_model.layers.46": 0,
+      "model.language_model.layers.47": 0,
+      "model.language_model.layers.48": "cpu",
+      "model.language_model.layers.49": "cpu",
+      "model.language_model.layers.50": "cpu",
+      "model.language_model.layers.51": "cpu",
+      "model.language_model.layers.52": "cpu",
+      "model.language_model.layers.53": "cpu",
+      "model.language_model.layers.54": "cpu",
+      "model.language_model.layers.55": "cpu",
+      "model.language_model.layers.56": "cpu",
+      "model.language_model.layers.57": "cpu",
+      "model.language_model.layers.58": "cpu",
+      "model.language_model.layers.59": "cpu",
+      "model.language_model.layers.60": "cpu",
+      "model.language_model.layers.61": "cpu",
+      "model.language_model.layers.62": "cpu",
+      "model.language_model.layers.63": "cpu"
+    },
+    "fp8_linear_count": 336,
+    "resident_parameter_bytes_by_device_dtype": {
+      "meta/torch.bfloat16": 8872297184,
+      "cuda:0/torch.bfloat16": 8595740416,
+      "cuda:0/torch.float8_e4m3fn": 13967032320,
+      "cuda:0/torch.float32": 3409920,
+      "meta/torch.float8_e4m3fn": 4655677440,
+      "meta/torch.float32": 1136640
+    },
+    "target_class": "Qwen3_5Attention",
+    "projections": {
+      "q_proj": {
+        "class": "FP8Linear",
+        "parameters": {
+          "weight": {
+            "shape": [
+              12288,
+              5120
+            ],
+            "dtype": "torch.float8_e4m3fn",
+            "device": "cuda:0"
+          },
+          "weight_scale_inv": {
+            "shape": [
+              96,
+              40
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0"
+          }
+        }
+      },
+      "k_proj": {
+        "class": "FP8Linear",
+        "parameters": {
+          "weight": {
+            "shape": [
+              1024,
+              5120
+            ],
+            "dtype": "torch.float8_e4m3fn",
+            "device": "cuda:0"
+          },
+          "weight_scale_inv": {
+            "shape": [
+              8,
+              40
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0"
+          }
+        }
+      },
+      "v_proj": {
+        "class": "FP8Linear",
+        "parameters": {
+          "weight": {
+            "shape": [
+              1024,
+              5120
+            ],
+            "dtype": "torch.float8_e4m3fn",
+            "device": "cuda:0"
+          },
+          "weight_scale_inv": {
+            "shape": [
+              8,
+              40
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0"
+          }
+        }
+      },
+      "o_proj": {
+        "class": "FP8Linear",
+        "parameters": {
+          "weight": {
+            "shape": [
+              5120,
+              6144
+            ],
+            "dtype": "torch.float8_e4m3fn",
+            "device": "cuda:0"
+          },
+          "weight_scale_inv": {
+            "shape": [
+              40,
+              48
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0"
+          }
+        }
+      }
+    },
+    "full_attention_layers": [
+      3,
+      7,
+      11,
+      15,
+      19,
+      23,
+      27,
+      31,
+      35,
+      39,
+      43,
+      47,
+      51,
+      55,
+      59,
+      63
+    ]
+  },
+  "exception": "OutOfMemoryError('CUDA out of memory. Tried to allocate 2.37 GiB. GPU 0 has a total capacity of 23.52 GiB of which 1.98 GiB is free. Including non-PyTorch memory, this process has 21.52 GiB memory in use. Of the allocated memory 21.02 GiB is allocated by PyTorch, and 43.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/jinyuzhe/attention/scripts/run_qwen.py\", line 67, in main\n    summary,_,_=runner.run(prompt,a.mode,a.steps,capture=False)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/src/pnm/models/qwen38/runner.py\", line 39, in run\n    out=self.model(input_ids=input_ids,attention_mask=torch.ones_like(input_ids),use_cache=True,logits_to_keep=1)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1783, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1794, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py\", line 192, in new_forward\n    output = module._old_forward(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/utils/generic.py\", line 943, in wrapper\n    output = func(self, *args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py\", line 1851, in forward\n    outputs = self.model(\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1783, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1794, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/utils/generic.py\", line 943, in wrapper\n    output = func(self, *args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py\", line 1603, in forward\n    inputs_embeds = self.get_input_embeddings()(input_ids)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1783, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1794, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py\", line 187, in new_forward\n    args, kwargs = module._hf_hook.pre_forward(module, *args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py\", line 50, in wrapper\n    return wrapper._compiled_fn(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py\", line 1548, in _fn\n    return fn(*args, **kwargs)\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py\", line 388, in pre_forward\n    set_module_tensor_to_device(\n  File \"/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/utils/modeling.py\", line 353, in set_module_tensor_to_device\n    new_value = value.to(device, non_blocking=non_blocking)\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.37 GiB. GPU 0 has a total capacity of 23.52 GiB of which 1.98 GiB is free. Including non-PyTorch memory, this process has 21.52 GiB memory in use. Of the allocated memory 21.02 GiB is allocated by PyTorch, and 43.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)\n",
+  "metrics": {
+    "counts": {},
+    "bytes": {},
+    "milliseconds": {}
+  }
+}

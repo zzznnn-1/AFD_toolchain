@@ -1,0 +1,78 @@
+Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+Resolving official FP8 snapshot Qwen/Qwen3.8-27B-FP8 017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Anchoring 65 ambiguous FP8 exclusion names; checkpoint weights/scales unchanged
+Loading FP8 model; resident decoder layers 48 snapshot /home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Thread 0x000070d268ef8640 (most recent call first):
+  File "/usr/lib/python3.10/threading.py", line 324 in wait
+  File "/usr/lib/python3.10/threading.py", line 607 in wait
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/tqdm/_monitor.py", line 69 in run
+  File "/usr/lib/python3.10/threading.py", line 1016 in _bootstrap_inner
+  File "/usr/lib/python3.10/threading.py", line 973 in _bootstrap
+
+Current thread 0x000070d39e84f000 (most recent call first):
+  File "/usr/lib/python3.10/sre_parse.py", line 860 in _parse
+  File "/usr/lib/python3.10/sre_parse.py", line 444 in _parse_sub
+  File "/usr/lib/python3.10/sre_parse.py", line 955 in parse
+  File "/usr/lib/python3.10/sre_compile.py", line 788 in compile
+  File "/usr/lib/python3.10/re.py", line 303 in _compile
+  File "/usr/lib/python3.10/re.py", line 190 in match
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/quantizers/quantizers_utils.py", line 39 in <genexpr>
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/quantizers/quantizers_utils.py", line 38 in should_convert_module
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/integrations/finegrained_fp8.py", line 856 in replace_with_fp8_linear
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/quantizers/quantizer_finegrained_fp8.py", line 134 in _process_model_before_weight_loading
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/quantizers/base.py", line 175 in preprocess_model
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4295 in from_pretrained
+  File "/home/jinyuzhe/attention/src/pnm/models/qwen38/loader.py", line 62 in load_model
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 42 in main
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 84 in <module>
+Some parameters are on the meta device because they were offloaded to the cpu.
+FP8 model loaded in 77.36225354019552 seconds
+Traceback (most recent call last):
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 44, in main
+    write_json(a.output,result)
+  File "/home/jinyuzhe/attention/src/pnm/validation.py", line 52, in write_json
+    Path(path).write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 84, in <module>
+    if __name__=='__main__': main()
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 80, in main
+    write_json(a.output,result)
+  File "/home/jinyuzhe/attention/src/pnm/validation.py", line 52, in write_json
+    Path(path).write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable

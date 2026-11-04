@@ -1,0 +1,19 @@
+FP8Linear(in_features=256, out_features=256, bias=False)
+[('weight', 'torch.float8_e4m3fn', [256, 256]), ('weight_scale_inv', 'torch.float32', [2, 2])]
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/integrations/finegrained_fp8.py", line 333, in forward
+    return fp8_linear(
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/integrations/finegrained_fp8.py", line 282, in fp8_linear
+    return finegrained_fp8_linear(input, weight, weight_scale_inv, block_size, bias, activation_scale)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/integrations/finegrained_fp8.py", line 194, in finegrained_fp8_linear
+    finegrained_fp8 = load_finegrained_fp8_kernel()
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/integrations/finegrained_fp8.py", line 142, in load_finegrained_fp8_kernel
+    _load_finegrained_fp8_kernel()
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/integrations/finegrained_fp8.py", line 107, in _load_finegrained_fp8_kernel
+    raise ImportError(f"finegrained-fp8 kernel unavailable: {_MISSING_KERNELS_MESSAGE}")
+ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.17.0 <= version < 0.18.0), e.g. `pip install kernels==0.17.0`

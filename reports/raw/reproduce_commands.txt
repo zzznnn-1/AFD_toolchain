@@ -1,0 +1,17 @@
+# Run from /home/jinyuzhe/attention; use existing Python 3.10 venv.
+.venv/bin/pip install -r requirements-pnm.txt
+.venv/bin/pip install -e . --no-deps
+.venv/bin/python scripts/check_environment.py > reports/raw/P0_environment.log 2>&1
+.venv/bin/python scripts/probe_fp8.py > reports/raw/fp8_kernel_probe.log 2>&1
+.venv/bin/python scripts/test_attention.py > reports/raw/P1_attention.log 2>&1
+.venv/bin/python scripts/test_emulator.py --steps 128 > reports/raw/P2_emulator.log 2>&1
+.venv/bin/python scripts/benchmark.py --lengths 16 1024 4096 > reports/raw/benchmark.log 2>&1
+.venv/bin/python -m pytest -q --junitxml=reports/raw/unit_tests.xml > reports/raw/unit_tests.log 2>&1
+HF_HUB_DISABLE_PROGRESS_BARS=1 .venv/bin/python scripts/download_model.py > reports/raw/download.log 2>&1
+HF_HUB_DISABLE_PROGRESS_BARS=1 TOKENIZERS_PARALLELISM=false .venv/bin/python -u scripts/run_qwen.py --suite --output reports/raw/P3_suite.json > reports/raw/P3_suite.log 2>&1
+.venv/bin/python scripts/write_reports.py
+.venv/bin/python scripts/verify_results.py > reports/raw/acceptance.log 2>&1
+# The three individual modes are also supported:
+.venv/bin/python scripts/run_qwen.py --mode local --steps 32 --output reports/raw/local.json
+.venv/bin/python scripts/run_qwen.py --mode shadow_compare --steps 32 --output reports/raw/shadow_compare.json
+.venv/bin/python scripts/run_qwen.py --mode shadow_remote --steps 128 --output reports/raw/shadow_remote.json

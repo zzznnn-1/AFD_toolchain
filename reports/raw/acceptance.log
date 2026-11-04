@@ -1,0 +1,27 @@
+{
+  "status": "BLOCKED",
+  "functional_status": "PASS",
+  "stages": {
+    "P0": "PASS",
+    "P1": "PASS",
+    "P2": "PASS",
+    "P3": "BLOCKED"
+  },
+  "P3_functional_status": "PASS",
+  "P3_deployment_status": "BLOCKED: CPU weight offload and pre-existing unrelated GPU1 service",
+  "unit_tests": 13,
+  "command_counts": {
+    "alloc_cache": 8,
+    "init_cache": 8,
+    "get_cache_info": 1104,
+    "append_and_attend": 544,
+    "free_cache": 8
+  },
+  "remote_tokens": 544,
+  "remote_output_tokens": 352,
+  "all_greedy_sequences_match": true,
+  "deployment_constraints": {
+    "all_weights_resident_gpu0": "BLOCKED: capacity; CPU weight offload used",
+    "exclusive_physical_gpu1": "BLOCKED: pre-existing unrelated service"
+  }
+}

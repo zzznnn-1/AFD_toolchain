@@ -1,0 +1,59 @@
+[
+  {
+    "history": 16,
+    "steps": 128,
+    "status": "PASS",
+    "pinned_bytes": 680576,
+    "attention_ms_per_step": 0.19197274919133633,
+    "transfer_bytes": {
+      "cuda:0_d2h": 2162688,
+      "cuda:1_h2d": 2162688,
+      "cuda:1_d2h": 1572864,
+      "cuda:0_h2d": 1572864
+    },
+    "transfer_ms": {
+      "cuda:0_d2h": 7.220671994611621,
+      "cuda:1_h2d": 5.9318720027804375,
+      "cuda:1_d2h": 2.4279360063374043,
+      "cuda:0_h2d": 2.1698240069672465
+    }
+  },
+  {
+    "history": 1024,
+    "steps": 128,
+    "status": "PASS",
+    "pinned_bytes": 4813376,
+    "attention_ms_per_step": 0.08632349944673479,
+    "transfer_bytes": {
+      "cuda:0_d2h": 6291456,
+      "cuda:1_h2d": 6291456,
+      "cuda:1_d2h": 1572864,
+      "cuda:0_h2d": 1572864
+    },
+    "transfer_ms": {
+      "cuda:0_d2h": 9.083231948316097,
+      "cuda:1_h2d": 6.011104009114206,
+      "cuda:1_d2h": 2.320831995457411,
+      "cuda:0_h2d": 2.124767997302115
+    }
+  },
+  {
+    "history": 4096,
+    "steps": 128,
+    "status": "PASS",
+    "pinned_bytes": 17408576,
+    "attention_ms_per_step": 0.08228374959435314,
+    "transfer_bytes": {
+      "cuda:0_d2h": 18874368,
+      "cuda:1_h2d": 18874368,
+      "cuda:1_d2h": 1572864,
+      "cuda:0_h2d": 1572864
+    },
+    "transfer_ms": {
+      "cuda:0_d2h": 14.478463909588754,
+      "cuda:1_h2d": 6.287360018119216,
+      "cuda:1_d2h": 2.339199990965426,
+      "cuda:0_h2d": 2.106527996249497
+    }
+  }
+]

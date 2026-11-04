@@ -1,0 +1,55 @@
+{
+  "status": "BLOCKED",
+  "functional_status": "PASS",
+  "stages": {
+    "P0": "PASS",
+    "P1": "PASS",
+    "P2": "PASS",
+    "P3": "BLOCKED"
+  },
+  "P3_functional_status": "PASS",
+  "P3_deployment_status": "BLOCKED: CPU weight offload and pre-existing unrelated GPU1 service",
+  "unit_tests": 13,
+  "command_counts": {
+    "alloc_cache": 8,
+    "init_cache": 8,
+    "get_cache_info": 1104,
+    "append_and_attend": 544,
+    "free_cache": 8
+  },
+  "remote_tokens": 544,
+  "remote_output_tokens": 352,
+  "all_greedy_sequences_match": true,
+  "deployment_constraints": {
+    "all_weights_resident_gpu0": "BLOCKED: capacity; CPU weight offload used",
+    "exclusive_physical_gpu1": "BLOCKED: pre-existing unrelated service"
+  },
+  "source_sha256": {
+    "src/pnm/__init__.py": "45635bc2c6e2b090dbae95cc80b220628f12d2d57ad8e652c473ca6966f2b422",
+    "src/pnm/backends/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/pnm/backends/base.py": "116d850ab63df1aa2abb3ff81ae8d389f628bf00a44dd1bd3303247f5237e3ee",
+    "src/pnm/backends/cuda_staging.py": "c236d2502807ddf30ba7cc4cfd3126d8090dd28560e2d512ed5cb16ab52bf5a2",
+    "src/pnm/backends/gpu_emulator.py": "f3d8dedbb67dcd6c9484734926f4851c829ed7d912c6a1c29f63182978c04aa6",
+    "src/pnm/backends/gpu_kernel.py": "3c794f4cc808feca0d6dccd9129f23e1279320fd70b690f5c9521cbfa62e645a",
+    "src/pnm/backends/gpu_memory.py": "5831d6baff3c30c586ae5fd24fdb8a7d2f27e110d0755d1fc958239e1659c945",
+    "src/pnm/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/pnm/models/qwen38/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/pnm/models/qwen38/adapter.py": "13604dd5f8c97df5ce6dfc279b553191383b8be4cf2afc53bfdda3456b695879",
+    "src/pnm/models/qwen38/compare.py": "990675777638cc079847f6334a0385b88eb2afb14fc5ef8a6760c1951c6413c2",
+    "src/pnm/models/qwen38/injection.py": "962a031efc898589799286ef6f1df977e6a8450e4971ef4bbbd33b982331e671",
+    "src/pnm/models/qwen38/loader.py": "ff9e4369c22b4bb05cc603176915a8e1bae3c5bddcb43b64f97501ee8e3fd086",
+    "src/pnm/models/qwen38/runner.py": "46d44bd08ce5d32462a0b97781adaae6e8703948432ea59373215c5f2d5c2b2e",
+    "src/pnm/protocol/__init__.py": "604412c9e759e90405b626cd707a775b2fd54182b17e8cd63668e89beb9dfaf1",
+    "src/pnm/protocol/types.py": "6cbd7a8596ecf3b26d0feb0809b711ea6d8f88080a9d1170610482564a9483b0",
+    "src/pnm/runtime/__init__.py": "80cd6debe4b4689fcf905a7e3664c60aa9842995aea272230a927b14225c2d01",
+    "src/pnm/runtime/api.py": "13afffe0d02f37381b62b93b749deac48bbfb2b00a5286417507370919eac0c3",
+    "src/pnm/runtime/metrics.py": "5389924c56653024c42ea77b2fd2b7c323529b619fa7394167f5bf88d0ed0732",
+    "src/pnm/validation.py": "88767e78ef000c6320cb2f4a3d23e881052a44d3a81146020e81df42c3f236ca",
+    "tests/test_attention.py": "e76a98e5f164557886162ccec823546df843c70e95ab8730ee836a5890aa19c9",
+    "tests/test_loading.py": "0b1bc616dcca86da81154c844e95766366a9c8198e8da0cb22991c1970f09052",
+    "tests/test_protocol.py": "035c0c786533e225ef6d62d1a0f00416e3941c4cf8573f266676ed7306d58fc8",
+    "tests/test_qwen_adapter.py": "e085bc4afa9474f667191d3f9287614c1674902451a856103aef26fba3c9db20",
+    "tests/test_runtime.py": "b06e8a15b45ff4c41189ca212e08b430f1de071b138417716e1ced707a201112",
+    "configs/pnm.json": "50060fc3d8f3da93033d459ca8f2966e8e3c2356e50db8460b2e09ac3d9368e0"
+  }
+}

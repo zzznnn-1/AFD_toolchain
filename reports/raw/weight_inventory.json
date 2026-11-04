@@ -1,0 +1,463 @@
+{
+  "layers-0.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-1.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-10.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-11.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-12.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-13.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-14.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-15.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-16.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-17.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-18.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-19.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-2.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-20.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-21.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-22.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-23.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-24.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-25.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-26.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-27.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-28.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-29.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-3.safetensors": {
+    "file_bytes": 372313744,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-30.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-31.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-32.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-33.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-34.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-35.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-36.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-37.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-38.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-39.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-4.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-40.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-41.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-42.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-43.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-44.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-45.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-46.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-47.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-48.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-49.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-5.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-50.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-51.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-52.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-53.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-54.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-55.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-56.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-57.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-58.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-59.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-6.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-60.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-61.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-62.safetensors": {
+    "file_bytes": 383865472,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-63.safetensors": {
+    "file_bytes": 372313760,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-7.safetensors": {
+    "file_bytes": 372313744,
+    "elements_by_dtype": {
+      "BF16": 33472,
+      "F8_E4M3": 372244480
+    }
+  },
+  "layers-8.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "layers-9.safetensors": {
+    "file_bytes": 383865448,
+    "elements_by_dtype": {
+      "BF16": 566304,
+      "F8_E4M3": 382730240
+    }
+  },
+  "mtp.safetensors": {
+    "file_bytes": 477202224,
+    "elements_by_dtype": {
+      "BF16": 52477632,
+      "F8_E4M3": 372244480
+    }
+  },
+  "outside.safetensors": {
+    "file_bytes": 6007102112,
+    "elements_by_dtype": {
+      "BF16": 3003532016
+    }
+  }
+}

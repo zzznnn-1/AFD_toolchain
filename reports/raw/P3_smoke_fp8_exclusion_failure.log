@@ -1,0 +1,57 @@
+Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+Resolving official FP8 snapshot Qwen/Qwen3.8-27B-FP8 017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Loading FP8 model; resident decoder layers 48 snapshot /home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+[transformers] [1mQwen3_5ForConditionalGeneration LOAD REPORT[0m from: /home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Key                                                                 | Status     |  | 
+--------------------------------------------------------------------+------------+--+-
+model.language_model.layers.{0...63}.mlp.gate_proj.weight_scale_inv | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Some parameters are on the meta device because they were offloaded to the cpu.
+FP8 model loaded in 72.48447581985965 seconds
+[W1104 09:15:50.397276356 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 2543845376 bytes (free: 2124480512, total: 25250627584).
+[W1104 09:15:50.397449164 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 2543845376 bytes (free: 2124480512, total: 25250627584).
+RESULT FAIL reports/raw/P3_smoke.json
+Traceback (most recent call last):
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 81, in <module>
+    if __name__=='__main__': main()
+  File "/home/jinyuzhe/attention/scripts/run_qwen.py", line 67, in main
+    summary,_,_=runner.run(prompt,a.mode,a.steps,capture=False)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/jinyuzhe/attention/src/pnm/models/qwen38/runner.py", line 39, in run
+    out=self.model(input_ids=input_ids,attention_mask=torch.ones_like(input_ids),use_cache=True,logits_to_keep=1)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 192, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1851, in forward
+    outputs = self.model(
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1603, in forward
+    inputs_embeds = self.get_input_embeddings()(input_ids)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 187, in new_forward
+    args, kwargs = module._hf_hook.pre_forward(module, *args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 50, in wrapper
+    return wrapper._compiled_fn(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 388, in pre_forward
+    set_module_tensor_to_device(
+  File "/home/jinyuzhe/attention/.venv/lib/python3.10/site-packages/accelerate/utils/modeling.py", line 353, in set_module_tensor_to_device
+    new_value = value.to(device, non_blocking=non_blocking)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.37 GiB. GPU 0 has a total capacity of 23.52 GiB of which 1.98 GiB is free. Including non-PyTorch memory, this process has 21.52 GiB memory in use. Of the allocated memory 21.02 GiB is allocated by PyTorch, and 43.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
