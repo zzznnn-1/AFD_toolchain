@@ -1,10 +1,22 @@
 # 双 GPU PNM / Qwen3.8-27B-FP8
 
-Python/PyTorch/Transformers 原型：GPU0 运行模型计算，GPU1 维护 Layer 3 BF16 KV 并计算 Attention，CPU Runtime 通过显式 pinned-memory staging 传输。当前范围是 P0–P3 Shadow Mode。
+Python/PyTorch/Transformers 原型：GPU0 运行模型计算，GPU1 维护 Layer 3 BF16 KV 并计算 Attention，CPU Runtime 通过显式 pinned-memory staging 传输。现已扩展到 P4 Strict Remote KV 和 P5 性能/压力/故障验证，P6 提供 Backend 接入契约并检测真实硬件依赖。
 
 工程代码位于 `src/pnm/`，配置位于 `configs/pnm.json`，运行入口位于 `scripts/`。项目仅保留 Qwen3.8-27B-FP8 原型及其测试、文档和报告。
 
 `main` 保存首轮 P0–P3 基线；`develop` 补齐加载预检、运行来源记录与失败校验。首轮报告在 [reports/ACCEPTANCE.md](reports/ACCEPTANCE.md)，develop 的完整复跑报告在 [reports/develop/ACCEPTANCE.md](reports/develop/ACCEPTANCE.md)。各次报告对应自己的命令、源代码哈希和实际日志；本机仍需 CPU 权重 offload，GPU1 上有既有其他服务。
+
+最新全方案结果见 [reports/complete/ACCEPTANCE.md](reports/complete/ACCEPTANCE.md)。当前 develop 独立工作区为 `/home/jinyuzhe/attention-develop`，主目录 `/home/jinyuzhe/attention` 保留用户的 main 工作区。新增 `strict_remote` 在 Prefill 后释放 Layer 3 本地 KV，仅 GPU1 保留完整历史；物理 GPU 独占、全部模型权重常驻和 Strict Remote KV 是不同验收条件。
+
+```bash
+cd /home/jinyuzhe/attention-develop
+.venv/bin/python scripts/complete_plan.py --output-dir reports/new-complete-run
+.venv/bin/python scripts/run_qwen.py --mode strict_remote --prompt-tokens 128 --steps 128
+```
+
+全方案入口实际运行 P0/P1/P2、所有回归、16×128 步设备压力、完整模型 4/16/128/1024/4096/8192 上下文各 128 步 local/strict 对比、严格模式 Greedy、Shadow 回归和完整模型故障注入，生成 JSON/CSV/Markdown。16/128-token 性能窗口取同一次 128 步运行的前缀，前 8 步不计入百分位，不伪装成独立重复实验。原先 `validate_all.py` 仍用于 P0–P3 专项复跑。
+
+真实 ASIC/PCIe 驱动及 DMA/队列 ABI 尚未提供，P6 不能声明实际验收通过；插件工厂、描述符校验和缺依赖时的明确失败路径已实现。vLLM 在规范中后置，未把服务器现有的其他 vLLM 服务当成本项目集成。详见 [Strict Remote 说明](docs/STRICT_REMOTE.md) 和 [驱动契约](docs/DRIVER_CONTRACT.md)。
 
 ## 环境
 
@@ -46,4 +58,4 @@ python scripts/verify_results.py --artifact-dir reports/new-run/raw
 
 `verify_results.py` 退出码 0 表示功能证据审计通过，部署状态由本次预检和实际 device_map 推导；加 `--strict-deployment` 后，部署 BLOCKED 返回 2，任何证据错误返回 1。旧版没有 execution provenance 的产物应保留为历史报告，不能用当前验证器重新认证。传输日志仅统计 PNM Q/K/V/O，不包括 CPU 权重 offload 流量。
 
-P0–P3 的实际状态、限制与复现日志见 `reports/`。Shadow Mode 有本地和远端两份 KV，尚未实现 P4。硬件上 GPU1 已有其他服务，本实验未更改其进程；性能数字是共享服务器上的软件路径测量。
+各阶段实际状态、限制与复现日志见 `reports/`。Shadow Mode 保留两份 KV；`strict_remote` 使用 metadata-only CacheBridge。硬件上 GPU1 已有其他服务，本实验未更改其进程；性能数字是共享服务器上的软件路径测量，不代表 ASIC/KXP 峰值性能。

@@ -4,20 +4,23 @@ The v1 API completes both copy events before returning. Copies are issued async 
 dedicated streams, but commands are serialized; there is no claim of overlap.
 """
 import torch
+from pathlib import Path
 from pnm.protocol import PNMError
 
 
 class HostStaging:
-    def __init__(self, source, target, max_tokens, spec, metrics):
+    def __init__(self, source, target, max_tokens, spec, metrics, chunk_tokens=256):
         self.source, self.target = torch.device(source), torch.device(target)
         if self.source == self.target or self.source.type != "cuda" or self.target.type != "cuda":
             raise ValueError("two distinct CUDA devices required")
         self.metrics = metrics
+        self.chunk_tokens = min(max_tokens,chunk_tokens)
+        self.transfers = 0
         self.streams = {d: torch.cuda.Stream(device=d) for d in (self.source, self.target)}
         self.slots = {}
         sizes = {"q": spec.query_heads * spec.head_dim,
-                 "k": max_tokens * spec.kv_heads * spec.head_dim,
-                 "v": max_tokens * spec.kv_heads * spec.head_dim,
+                 "k": self.chunk_tokens * spec.kv_heads * spec.head_dim,
+                 "v": self.chunk_tokens * spec.kv_heads * spec.head_dim,
                  "o": spec.query_heads * spec.head_dim, "mask": max_tokens}
         for name, size in sizes.items():
             dtype = torch.float32 if name == "mask" else torch.bfloat16
@@ -54,9 +57,27 @@ class HostStaging:
             end.record(d)
         torch.cuda.current_stream(dst).wait_event(end)
         end.synchronize()  # Both sides finished before reusing this pinned slot.
+        self.transfers += 1
         self.metrics.emit({"command_id": command_id, "stage": f"{dst}_h2d", "tensor": name,
                            "bytes": inp.numel() * inp.element_size(), "ms": start.elapsed_time(end), "pinned": h.is_pinned()})
         return out
+
+    def describe(self):
+        numa={}
+        try:
+            ranges=[]
+            for line in Path('/proc/self/maps').read_text().splitlines():
+                start,end=(int(v,16) for v in line.split()[0].split('-'))
+                ranges.append((start,end))
+            maps={int(line.split()[0],16):line for line in Path('/proc/self/numa_maps').read_text().splitlines()}
+            for name,(host,_) in self.slots.items():
+                region=next((start for start,end in ranges if start<=host.data_ptr()<end),None)
+                numa[name]={'vma':maps.get(region),'scope':'whole containing VMA, not exact buffer page placement'}
+        except OSError as exc:
+            numa={'unavailable':str(exc)}
+        return {'transport':'host_staging','pinned_bytes':self.allocated_bytes,'all_pinned':self.all_pinned,
+                'chunk_tokens':self.chunk_tokens,'preallocated_slots':len(self.slots),
+                'transfer_calls':self.transfers,'pool_resizes':0,'host_numa_vmas':numa}
 
     def close(self):
         for s in self.streams.values():

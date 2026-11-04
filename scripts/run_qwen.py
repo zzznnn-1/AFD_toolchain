@@ -21,7 +21,7 @@ def main():
     faulthandler.register(signal.SIGUSR1)
     p = argparse.ArgumentParser()
     p.add_argument('--config', default='configs/pnm.json')
-    p.add_argument('--mode', choices=['local','shadow_compare','shadow_remote'], default='shadow_remote')
+    p.add_argument('--mode', choices=['local','shadow_compare','shadow_remote','strict_remote'], default='shadow_remote')
     p.add_argument('--model-path')
     p.add_argument('--steps', type=int, default=32)
     p.add_argument('--prompt')
@@ -61,7 +61,7 @@ def main():
         result['model'] = facts
         write_json(output, result)
         if a.suite or a.mode != 'local':
-            runtime = Runtime(GPUEmulator(config['source_device'], config['emulator_device'], config['capacity'], metrics))
+            runtime = Runtime(GPUEmulator(config['source_device'], config['emulator_device'], config['capacity'], metrics),metrics)
         runner = Runner(model, tokenizer, runtime, config['capacity'], config['attention_atol'], config['attention_rtol'])
         if a.suite:
             for label, length, steps in [('short',None,32), ('medium',512,128), ('context4096',4096,32)]:

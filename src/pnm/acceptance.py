@@ -39,13 +39,17 @@ def verify_trace(records, run_id, runs):
         require(c['dtype'] == 'bfloat16' and c['layout'] == 'BHTD' and c['layer_id'] == 3, 'wrong command contract')
         require(c['request_id'] in remote_runs, 'unknown request in trace')
         h, op, run = c['handle'], c['op'], remote_runs[c['request_id']]
-        transfers = [r for r in group if r['stage'] not in ('command', 'attention')]
+        transfer_stages=('cuda:0_d2h','cuda:1_h2d','cuda:1_d2h','cuda:0_h2d')
+        auxiliary={'runtime_prepare','queue','kv_init','kv_append'}
+        require(all(r['stage'] in (*transfer_stages,'command','attention',*auxiliary) for r in group),'unknown stage')
+        transfers = [r for r in group if r['stage'] in transfer_stages]
         actual = Counter((r['stage'], r['tensor'], r['bytes']) for r in transfers)
+        control_only=all(r['stage'] in ('command','runtime_prepare','queue') for r in group)
         require(all(r.get('pinned') is True for r in transfers), 'non-pinned transfer')
         if op == 'alloc_cache':
             require(h not in states and c['length'] == 0, 'invalid allocation')
             states[h] = {'request':c['request_id'], 'length':0, 'initialized':False, 'freed':False, 'steps':0}
-            require(len(group) == 1, 'allocation unexpectedly transferred data')
+            require(control_only, 'allocation unexpectedly transferred data')
         else:
             require(h in states, 'command references unallocated handle')
             s = states[h]
@@ -53,8 +57,16 @@ def verify_trace(records, run_id, runs):
             if op == 'init_cache':
                 require(not s['initialized'] and c['length'] == run['prompt_tokens'], 'prefill repeated or wrong length')
                 nbytes = run['prompt_tokens'] * 4 * 256 * 2
-                expected = Counter((stage, name, nbytes) for stage in ('cuda:0_d2h','cuda:1_h2d') for name in ('k','v'))
-                require(actual == expected and len(group) == 5, 'prefill staging mismatch')
+                expected={(stage,name):nbytes for stage in ('cuda:0_d2h','cuda:1_h2d') for name in ('k','v')}
+                sums=Counter()
+                for r in transfers: sums[(r['stage'],r['tensor'])]+=r['bytes']
+                require(dict(sums)==expected and not any(r['stage']=='attention' for r in group),'prefill staging mismatch')
+                offset=0
+                for r in group:
+                    if r['stage']=='kv_init':
+                        require(r['position']==offset,'prefill chunk position mismatch')
+                        offset+=r['tokens']
+                require(offset in (0,run['prompt_tokens']),'prefill chunk incomplete')
                 s.update(initialized=True, length=run['prompt_tokens'])
             elif op == 'append_and_attend':
                 require(s['initialized'] and c['token_position'] == c['expected_length'] == s['length'], 'append position mismatch or replay')
@@ -65,12 +77,12 @@ def verify_trace(records, run_id, runs):
                 require(actual == expected, 'decode transfer duplicated, missing or retransmitted history')
                 kernels = [r for r in group if r['stage'] == 'attention']
                 require(len(kernels) == 1 and kernels[0]['device'] == 'cuda:1' and kernels[0]['length'] == c['length'], 'GPU1 kernel evidence missing')
-                require(len(group) == 10, 'unexpected decode trace records')
+                require(sum(r['stage'] not in auxiliary for r in group)==10,'unexpected decode trace records')
                 s.update(length=c['length'], steps=s['steps']+1)
             elif op == 'get_cache_info':
-                require(c['length'] == s['length'] and len(group) == 1, 'status length mismatch')
+                require(c['length'] == s['length'] and control_only, 'status length mismatch')
             elif op == 'free_cache':
-                require(c['length'] == s['length'] and len(group) == 1, 'free length mismatch')
+                require(c['length'] == s['length'] and control_only, 'free length mismatch')
                 require(s['steps'] == run['decode_steps'], 'decode count does not match trace')
                 s['freed'] = True
             else:

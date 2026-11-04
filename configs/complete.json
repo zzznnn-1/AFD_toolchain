@@ -1,0 +1,20 @@
+{
+  "model_id": "Qwen/Qwen3.8-27B-FP8",
+  "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+  "source_device": "cuda:0",
+  "emulator_device": "cuda:1",
+  "layer_id": 3,
+  "capacity": 16384,
+  "resident_layers": "auto",
+  "workspace_reserve_gib": 4.5,
+  "seed": 20261104,
+  "dtype": "bfloat16",
+  "attention_atol": 0.02,
+  "attention_rtol": 0.02,
+  "logits_atol": 0.25,
+  "logits_rtol": 0.02,
+  "contexts": [4, 16, 128, 1024, 4096, 8192],
+  "decode_steps": 128,
+  "warmup_steps": 8,
+  "prefill_chunk_tokens": 256
+}

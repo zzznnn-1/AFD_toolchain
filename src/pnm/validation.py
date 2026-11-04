@@ -32,7 +32,10 @@ def reference_attention(q, k, v, query_start=0, mask=None, chunk_size=64):
 def errors(actual, reference, relative_floor=1e-3):
     a, b = actual.detach().float(), reference.detach().float()
     diff = (a - b).abs()
+    norm=a.norm()*b.norm()
+    cosine=float(torch.dot(a.flatten(),b.flatten())/norm) if norm>0 else float(not a.any() and not b.any())
     return {"max_abs": diff.max().item(), "mean_abs": diff.mean().item(),
+            "cosine_similarity":cosine,
             "max_relative": (diff / b.abs().clamp_min(relative_floor)).max().item(),
             "rms": diff.square().mean().sqrt().item(), "relative_floor": relative_floor,
             "reference_abs_max": b.abs().max().item(), "finite": bool(torch.isfinite(a).all() and torch.isfinite(b).all())}

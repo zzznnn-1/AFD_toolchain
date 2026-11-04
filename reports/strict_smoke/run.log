@@ -1,0 +1,10 @@
+Current Python version 3.10 is below the recommended 3.11 version. It is recommended to upgrade to Python 3.11 or higher for the best experience.
+Resolving official FP8 snapshot Qwen/Qwen3.8-27B-FP8 017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Anchoring 65 ambiguous FP8 exclusion names; checkpoint weights/scales unchanged
+Loading FP8 model; resident decoder layers 47 snapshot /home/jinyuzhe/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B-FP8/snapshots/017b9c7af6b5689d5dd426a76e0bc077eb5ca20a
+Some parameters are on the meta device because they were offloaded to the cpu.
+FP8 model loaded in 68.6496169026941 seconds
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+qwen strict_remote step=1/16 cache=129 remote_used=1
+RESULT PASS reports/strict_smoke/run.json

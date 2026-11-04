@@ -21,6 +21,7 @@ class Injection:
         native=ALL_ATTENTION_FUNCTIONS.get_interface(cfg._attn_implementation,eager_attention_forward)
         self.adapter=AttentionAdapter(native,mode,runtime,capacity,layer_id,atol,rtol)
         self.active=False
+        self.preparation_hook=None
 
     def __enter__(self):
         if self.active: raise RuntimeError('already installed')
@@ -28,6 +29,7 @@ class Injection:
         cfg=copy(self.original_config)
         cfg._attn_implementation=self.key
         self.attention.config=cfg
+        self.preparation_hook=self.attention.register_forward_pre_hook(self.adapter.begin_preparation,with_kwargs=True)
         self.active=True
         return self.adapter
 
@@ -36,6 +38,9 @@ class Injection:
             try:
                 self.adapter.reset()
             finally:
+                if self.preparation_hook is not None:
+                    self.preparation_hook.remove()
+                    self.preparation_hook=None
                 self.attention.config=self.original_config
                 del ALL_ATTENTION_FUNCTIONS[self.key]
                 self.active=False

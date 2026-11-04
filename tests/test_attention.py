@@ -29,3 +29,13 @@ def test_masked_out_rows():
     mask=torch.zeros(1,1,1,16,dtype=torch.bool)
     o=attend(q,k,k,15,mask)
     assert torch.isfinite(o).all() and not o.any()
+
+
+def test_float32_independent_reference():
+    torch.manual_seed(20261104)
+    torch.backends.cuda.matmul.allow_tf32=False
+    q=torch.randn(1,24,16,256,device='cuda:0')
+    k=torch.randn(1,4,16,256,device='cuda:0')
+    v=torch.randn_like(k)
+    result=check_close(attend(q,k,v),reference_attention(q,k,v),atol=1e-4,rtol=1e-5)
+    assert result['mean_abs']<1e-5 and result['cosine_similarity']>0.99999

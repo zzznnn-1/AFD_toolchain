@@ -19,17 +19,20 @@ class CacheManager:
     def __init__(self, device):
         self.device = torch.device(device)
         self.entries = {}
+        self.generation = 1
 
     def allocate(self, request_id, layer_id, spec):
         spec.validate()
         shape = (spec.batch, spec.kv_heads, spec.capacity, spec.head_dim)
-        h = uuid4().hex
+        h = f'{self.generation}:{uuid4().hex}'
         self.entries[h] = Entry(request_id, layer_id, spec,
                                 torch.empty(shape, dtype=torch.bfloat16, device=self.device),
                                 torch.empty(shape, dtype=torch.bfloat16, device=self.device))
         return h
 
     def get(self, handle, request_id, layer_id):
+        if isinstance(handle,str) and ':' in handle and handle.split(':',1)[0] != str(self.generation):
+            raise PNMError('STALE_HANDLE','handle belongs to a previous device generation')
         if handle not in self.entries:
             raise PNMError("INVALID_HANDLE", str(handle))
         e = self.entries[handle]
@@ -40,10 +43,15 @@ class CacheManager:
     def info(self, handle):
         e = self.entries[handle]
         return CacheInfo(handle, e.request_id, e.layer_id, e.length, e.spec.capacity,
-                         e.spec.dtype, e.spec.layout, 2 * e.key.numel() * e.key.element_size(), e.initialized)
+                         e.spec.dtype, e.spec.layout, 2 * e.key.numel() * e.key.element_size(), e.initialized,
+                         self.generation)
 
     def free(self, handle):
         del self.entries[handle]
 
     def close(self):
         self.entries.clear()
+
+    def reset(self):
+        self.entries.clear()
+        self.generation += 1

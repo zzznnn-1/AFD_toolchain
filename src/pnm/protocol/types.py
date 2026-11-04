@@ -48,6 +48,8 @@ class Command:
     spec: CacheSpec | None = None
     dtype: str = "bfloat16"
     layout: str = "BHTD"
+    version: int = 1
+    generation: int = 0
 
 
 @dataclass(frozen=True)
@@ -61,6 +63,7 @@ class CacheInfo:
     layout: str
     allocated_bytes: int
     initialized: bool
+    generation: int = 0
 
 
 @dataclass
