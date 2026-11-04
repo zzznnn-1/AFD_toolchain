@@ -5,7 +5,7 @@ gate and o_proj follow its returned tensor. No environment source is patched.
 """
 import torch
 from pnm.protocol import CacheSpec
-from pnm.validation import errors, check_close
+from pnm.validation import check_close
 
 
 class AttentionAdapter:
@@ -15,6 +15,8 @@ class AttentionAdapter:
                  atol=0.02, rtol=0.02):
         if mode not in self.MODES:
             raise ValueError(mode)
+        if mode != 'local' and runtime is None:
+            raise ValueError('remote attention requires a runtime')
         self.original = original_interface
         self.mode, self.runtime = mode, runtime
         self.capacity, self.layer_id = capacity, layer_id

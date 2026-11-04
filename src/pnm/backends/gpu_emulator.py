@@ -43,7 +43,8 @@ class GPUEmulator(Backend):
             except Exception as exc:
                 result = Completion(c.command_id, "FAIL", error_code="DEVICE_ERROR", error_message=repr(exc))
             self.metrics.emit({"stage": "command", "command_id": c.command_id, "op": c.op.value,
-                               "request_id": c.request_id, "layer_id": c.layer_id, "handle": c.handle,
+                               "request_id": c.request_id, "layer_id": c.layer_id,
+                               "handle": result.info.handle if result.info else c.handle,
                                "token_position": c.token_position, "expected_length": c.expected_length,
                                "dtype": c.dtype, "layout": c.layout, "status": result.status,
                                "error_code": result.error_code, "length": result.info.sequence_length if result.info else None,
@@ -134,7 +135,9 @@ class GPUEmulator(Backend):
     def close(self):
         with self.lock:
             if not self.closed:
-                self.transport.close()
-                self.manager.close()
-                self.seen.clear()
-                self.closed = True
+                try:
+                    self.transport.close()
+                finally:
+                    self.manager.close()
+                    self.seen.clear()
+                    self.closed = True

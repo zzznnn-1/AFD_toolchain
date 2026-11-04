@@ -3,10 +3,12 @@ import argparse
 import torch
 from pnm.backends.gpu_kernel import attend
 from pnm.validation import reference_attention, check_close, write_json
+from pnm.evidence import provenance, finish_provenance
 
 
 @torch.inference_mode()
 def run(lengths, device="cuda:0", seed=20261104):
+    evidence = provenance(_bootstrap.ROOT)
     torch.manual_seed(seed)
     torch.backends.cuda.matmul.allow_tf32 = False
     results = []
@@ -41,7 +43,8 @@ def run(lengths, device="cuda:0", seed=20261104):
     o = attend(q[:,:,:1],k,v,15)
     torch.testing.assert_close(o,torch.full_like(o,7.5),atol=0,rtol=0)
     results.append({"case":"decode_upper_left_regression", "pass":True})
-    return {"status":"PASS", "seed":seed, "device":device, "dtype":"bfloat16", "reference":"FP32 explicit grouped matmul/softmax", "cases":results}
+    finish_provenance(evidence, _bootstrap.ROOT)
+    return {"status":"PASS", "provenance":evidence, "seed":seed, "device":device, "dtype":"bfloat16", "reference":"FP32 explicit grouped matmul/softmax", "cases":results}
 
 
 if __name__ == '__main__':

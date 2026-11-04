@@ -7,6 +7,7 @@ from collections import Counter
 import torch
 from huggingface_hub import snapshot_download
 from transformers import AutoConfig, AutoTokenizer, Qwen3_5ForConditionalGeneration
+from .preflight import DeploymentBlocked, hardware_snapshot, inventory, placement_plan
 
 
 def correct_skip_prefix_collisions(disk_config, weight_map):
@@ -22,7 +23,7 @@ def correct_skip_prefix_collisions(disk_config, weight_map):
     return [p+'$' if p in collisions else p for p in skip],collisions
 
 
-def load_model(config, local_path=None):
+def resolve_snapshot(config, local_path=None):
     if config['source_device']!='cuda:0' or config['emulator_device']!='cuda:1':
         raise ValueError('model runner currently requires the audited GPU0/GPU1 layout')
     print('Resolving official FP8 snapshot',config['model_id'],config['revision'],flush=True)
@@ -38,19 +39,33 @@ def load_model(config, local_path=None):
     if path is None:
         path=snapshot_download(config['model_id'],revision=config['revision'],
                                allow_patterns=['*.json','*.safetensors','*.jinja','*.txt'])
+    return path
+
+
+def prepare_model(config, local_path=None, strict=False, needs_emulator=True):
+    if config['model_id'] != 'Qwen/Qwen3.8-27B-FP8':
+        raise ValueError('this prototype requires Qwen/Qwen3.8-27B-FP8')
+    path = resolve_snapshot(config, local_path)
+    report = placement_plan(config, inventory(path), hardware_snapshot(), strict, needs_emulator)
+    report.update(model_id=config['model_id'], revision=config['revision'], snapshot_path=str(path))
+    return path, report
+
+
+def load_model(config, local_path=None, preflight=None):
+    if preflight is None:
+        path, preflight = prepare_model(config, local_path)
+    else:
+        path = preflight['snapshot_path']
+    if preflight['status'] != 'PASS':
+        raise DeploymentBlocked(preflight)
     disk_config=json.loads((Path(path)/'config.json').read_text())
     if disk_config.get('quantization_config',{}).get('quant_method')!='fp8':
         raise ValueError('official FP8 checkpoint required; BF16/NF4 substitution forbidden')
     cfg=disk_config['text_config']
-    assert (cfg['num_hidden_layers'],cfg['num_attention_heads'],cfg['num_key_value_heads'],cfg['head_dim'])==(64,24,4,256)
-    resident=config['resident_layers']
-    if not 0<=resident<=64: raise ValueError('resident_layers must be 0..64')
-    if resident==64 and config.get('fully_resident',False):
-        device_map={'':0}
-    else:
-        device_map={'model.visual':'cpu','model.language_model.embed_tokens':'cpu','lm_head':'cpu',
-                    'model.language_model.norm':0,'model.language_model.rotary_emb':0}
-        device_map.update({f'model.language_model.layers.{i}':0 if i<resident else 'cpu' for i in range(64)})
+    if (cfg['num_hidden_layers'],cfg['num_attention_heads'],cfg['num_key_value_heads'],cfg['head_dim']) != (64,24,4,256):
+        raise ValueError('checkpoint dimensions differ from the audited Qwen3.8 model')
+    resident=preflight['selected_resident_layers']
+    device_map=preflight['device_map']
     start=time.perf_counter()
     weight_map=json.loads((Path(path)/'model.safetensors.index.json').read_text())['weight_map']
     corrected_skip,collisions=correct_skip_prefix_collisions(disk_config,weight_map)
@@ -64,10 +79,14 @@ def load_model(config, local_path=None):
         attn_implementation='sdpa',output_loading_info=True)
     model.eval()
     print('FP8 model loaded in',time.perf_counter()-start,'seconds',flush=True)
-    if getattr(model.config.quantization_config,'dequantize',False):
+    quantization = model.config.quantization_config
+    dequantized = quantization.get('dequantize', False) if isinstance(quantization, dict) else quantization.dequantize
+    if dequantized:
         raise RuntimeError('FP8 unexpectedly dequantized')
-    assert not any(p.device==torch.device('cuda:1') for p in model.parameters())
-    assert 1 not in model.hf_device_map.values() and 'cuda:1' not in model.hf_device_map.values()
+    if any(p.device == torch.device('cuda:1') for p in model.parameters()):
+        raise RuntimeError('model parameters found on emulator GPU')
+    if any(d in (1, 'cuda:1') for d in model.hf_device_map.values()):
+        raise RuntimeError('device map assigns weights to emulator GPU')
     from transformers.integrations.finegrained_fp8 import FP8Linear
     fp8=[n for n,m in model.named_modules() if isinstance(m,FP8Linear)]
     if not fp8: raise RuntimeError('no FP8Linear modules loaded')

@@ -25,3 +25,24 @@ def test_control_only_backend_and_cleanup():
     assert backend.closed
     with pytest.raises(PNMError,match='CLOSED'):
         rt.alloc_cache('request',3,CacheSpec(32))
+
+
+@pytest.mark.parametrize('corruption',['command_id','handle','owner','length'])
+def test_runtime_rejects_inconsistent_backend_completion(corruption):
+    from dataclasses import replace
+    backend=InMemoryControlBackend()
+    rt=Runtime(backend)
+    h=rt.alloc_cache('request',3,CacheSpec(32))
+    original=backend.execute
+    def wrong(c,p):
+        result=original(c,p)
+        if corruption=='command_id': result.command_id='different'
+        if corruption=='handle': result.info=replace(result.info,handle='different')
+        if corruption=='owner': result.info=replace(result.info,request_id='different')
+        if corruption=='length': result.info=replace(result.info,sequence_length=999)
+        return result
+    backend.execute=wrong
+    with pytest.raises(PNMError,match='INVALID_COMPLETION'): rt.get_cache_info(h)
+    assert rt.handles[h].sequence_length==0
+    backend.execute=original
+    rt.close()

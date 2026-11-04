@@ -19,8 +19,22 @@ class Runtime:
         payload = kwargs.pop("payload", {})
         c = Command(command_id or uuid4().hex, op, request_id, layer_id, handle, **kwargs)
         result = self.backend.execute(c, payload)
+        if result.command_id != c.command_id:
+            raise PNMError('INVALID_COMPLETION', 'backend returned a different command ID')
         if result.status != "PASS":
             raise PNMError(result.error_code, result.error_message)
+        info = result.info
+        if info is None or (info.request_id, info.layer_id, info.dtype, info.layout) != (
+                c.request_id, c.layer_id, c.dtype, c.layout):
+            raise PNMError('INVALID_COMPLETION', 'missing or mismatched cache metadata')
+        if c.handle is not None and info.handle != c.handle:
+            raise PNMError('INVALID_COMPLETION', 'backend returned a different handle')
+        if not 0 <= info.sequence_length <= info.capacity:
+            raise PNMError('INVALID_COMPLETION', 'invalid sequence length')
+        if op == Op.APPEND and (info.sequence_length != c.expected_length + 1 or result.output is None):
+            raise PNMError('INVALID_COMPLETION', 'append output or committed length missing')
+        if op == Op.ALLOC and (info.sequence_length != 0 or info.capacity != c.spec.capacity or info.initialized):
+            raise PNMError('INVALID_COMPLETION', 'allocated cache does not match requested spec')
         if result.info and op != Op.FREE:
             self.handles[result.info.handle] = result.info
         if op == Op.FREE:
@@ -31,6 +45,8 @@ class Runtime:
         return self._call(Op.ALLOC, request_id, layer_id, spec=spec, command_id=command_id).info.handle
 
     def _owned(self, handle):
+        if self.closed:
+            raise PNMError("CLOSED", "runtime closed")
         if handle not in self.handles:
             raise PNMError("INVALID_HANDLE", str(handle))
         i = self.handles[handle]

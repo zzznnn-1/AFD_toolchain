@@ -1,0 +1,24 @@
+Obtaining file:///home/jinyuzhe/attention
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: pnm-qwen38
+  Building editable for pnm-qwen38 (pyproject.toml): started
+  Building editable for pnm-qwen38 (pyproject.toml): finished with status 'done'
+  Created wheel for pnm-qwen38: filename=pnm_qwen38-0.2.0-0.editable-py3-none-any.whl size=1337 sha256=43ba5ce353b094b231e11ba1236930610bd6b5f589bee183a784fcec52d95ad1
+  Stored in directory: /tmp/pip-ephem-wheel-cache-ddwqwet6/wheels/01/3d/56/9098f9a5257e9879a92d626d5a2280ab5d006f147dfb821685
+Successfully built pnm-qwen38
+Installing collected packages: pnm-qwen38
+  Attempting uninstall: pnm-qwen38
+    Found existing installation: pnm-qwen38 0.1.0
+    Uninstalling pnm-qwen38-0.1.0:
+      Successfully uninstalled pnm-qwen38-0.1.0
+Successfully installed pnm-qwen38-0.2.0
+
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: /home/jinyuzhe/attention/.venv/bin/python -m pip install --upgrade pip

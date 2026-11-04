@@ -7,6 +7,7 @@ from pnm.runtime import Runtime
 from pnm.runtime.metrics import Metrics
 from pnm.backends.gpu_emulator import GPUEmulator
 from pnm.validation import reference_attention, check_close, write_json
+from pnm.evidence import provenance, finish_provenance
 
 
 def memory():
@@ -16,10 +17,12 @@ def memory():
 
 @torch.inference_mode()
 def run(steps=128, prefill=128, output="reports/raw/P2_emulator.json"):
+    evidence = provenance(_bootstrap.ROOT)
+    if steps < 1 or prefill < 1: raise ValueError('positive steps and prefill required')
     torch.manual_seed(20261104)
     torch.backends.cuda.matmul.allow_tf32=False
     capacity=prefill+steps+16
-    metrics=Metrics(output.replace('.json','.jsonl'))
+    metrics=Metrics(output.replace('.json','.jsonl'), run_id=evidence['run_id'])
     backend=GPUEmulator(max_tokens=capacity,metrics=metrics)
     transport_bytes=backend.transport.allocated_bytes
     pinned=backend.transport.all_pinned
@@ -66,7 +69,8 @@ def run(steps=128, prefill=128, output="reports/raw/P2_emulator.json"):
     assert summary['bytes']['cuda:1_h2d']==expected_input
     assert summary['bytes']['cuda:1_d2h']==steps*24*256*2
     assert summary['bytes']['cuda:0_h2d']==steps*24*256*2
-    result={'status':'PASS','seed':20261104,'steps':steps,'prefill':prefill,'pinned':pinned,
+    finish_provenance(evidence, _bootstrap.ROOT)
+    result={'status':'PASS','provenance':evidence,'seed':20261104,'steps':steps,'prefill':prefill,'pinned':pinned,
             'pinned_bytes':transport_bytes,'initial_cache':initial.__dict__,'final_cache':final.__dict__,
             'warm_memory':before,'final_memory':after,'metrics':summary,'steps_detail':records}
     write_json(output,result)

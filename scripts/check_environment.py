@@ -13,6 +13,7 @@ from pathlib import Path
 import torch
 import transformers
 from pnm.validation import write_json
+from pnm.evidence import provenance, finish_provenance
 
 
 def command(args):
@@ -27,6 +28,9 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--output", default="reports/raw/environment.json")
     args = p.parse_args()
+    evidence = provenance(_bootstrap.ROOT)
+    artifacts = Path(args.output).parent
+    artifacts.mkdir(parents=True, exist_ok=True)
     from transformers.models.qwen3_5.modeling_qwen3_5 import Qwen3_5Attention, Qwen3_5TextModel
     from transformers.cache_utils import Cache, DynamicCache, DynamicLayer
     classes = [Qwen3_5Attention, Qwen3_5TextModel, Cache, DynamicCache, DynamicLayer]
@@ -52,8 +56,10 @@ def main():
     for cls in classes:
         src = Path(inspect.getfile(cls))
         d["source"][cls.__name__] = {"path": str(src), "sha256": hashlib.sha256(src.read_bytes()).hexdigest()}
-    Path('reports/raw/transformers_attention_source.py.txt').write_text(inspect.getsource(Qwen3_5Attention))
-    Path('reports/raw/transformers_cache_source.py.txt').write_text(inspect.getsource(Cache.get_seq_length) + inspect.getsource(DynamicLayer))
+    (artifacts/'transformers_attention_source.py.txt').write_text(inspect.getsource(Qwen3_5Attention))
+    (artifacts/'transformers_cache_source.py.txt').write_text(inspect.getsource(Cache.get_seq_length) + inspect.getsource(DynamicLayer))
+    finish_provenance(evidence, _bootstrap.ROOT)
+    d['provenance'] = evidence
     write_json(args.output, d)
     print(json.dumps({"output": args.output, "versions": versions, "gpus": d["gpus"], "peer": d["peer_access"]}, indent=2))
 

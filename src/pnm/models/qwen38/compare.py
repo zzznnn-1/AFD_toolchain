@@ -3,6 +3,7 @@ import torch
 
 
 def compare_runs(local,remote,atol=0.25,rtol=0.02):
+    if not local or not remote: raise ValueError('empty run is not numerical validation')
     if len(local)!=len(remote): raise ValueError('different number of steps')
     records=[]
     for i,(a,b) in enumerate(zip(local,remote)):
